@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background3"
+    android:paddingLeft="60dp"
+    android:paddingTop="50dp"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="122dp"
+        android:orientation="vertical" />
+
+    <ImageView
+        android:id="@+id/appLogo"
+        android:layout_width="201dp"
+        android:layout_height="171dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:baselineAlignBottom="false"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/varela"
+        android:text="Busy Buddy"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/loginTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="320dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="LOGIN"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/usernameInput"
+        android:layout_width="315dp"
+        android:layout_height="58dp"
+        android:layout_marginLeft="0px"
+        android:layout_marginTop="370dp"
+        android:background="@drawable/edittext_border"
+        android:ems="10"
+        android:fontFamily="@font/average"
+        android:hint="Username"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:textColorHighlight="#0FFFFFFF"
+        android:textColorHint="#000000"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="315dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="440dp"
+        android:background="@drawable/edittext_border"
+        android:ems="10"
+        android:fontFamily="@font/average"
+        android:hint="Password"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:textColorHighlight="#0FFFFFFF"
+        android:textColorHint="#000000"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="104sp"
+        android:layout_height="48sp"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="580dp"
+        android:background="@drawable/loginbtn_border"
+        android:text="LOGIN"
+        android:textColor="@drawable/loginbtn_text_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="550dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Doesn't have an account?"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/signUpText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="550dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/signUp"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/checkboxSignIn"
+        android:layout_width="184dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginTop="500dp"
+        android:checked="true"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Stay Signed In"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:theme="@style/CheckBoxStyle" />
+
+</RelativeLayout>
