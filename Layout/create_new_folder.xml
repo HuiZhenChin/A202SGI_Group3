@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newfolderlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingTop="-50dp"
+    tools:context=".MainActivity">
+
+
+    <!--<ImageButton
+        android:id="@+id/gobackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="-5dp"
+        android:background="@drawable/back_button"
+        android:contentDescription="back"
+        android:src="@drawable/baseline_cancel_24" />-->
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="315dp"
+        android:layout_height="275dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/container_border">
+
+        <TextView
+            android:id="@+id/containerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/average"
+            android:text="Create New Folder"
+            android:textColor="#333333"
+            android:textSize="26dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/containerInstruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="80dp"
+            android:fontFamily="@font/average"
+            android:text="Name your folder: "
+            android:textColor="#333333"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/newFolderName"
+            android:layout_width="260dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="130dp"
+            android:background="@drawable/folderinput_border"
+            android:ems="10"
+            android:hint="New Folder Name"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:textColor="#333333"
+            android:textSize="16dp" />
+
+        <!--<Button
+            android:id="@+id/createNewFolderBtn"
+            android:layout_width="186sp"
+            android:layout_height="48sp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/createnewfolderbtn_border"
+            android:text="CREATE"
+            android:textColor="@drawable/loginbtn_text_color"
+            android:textSize="16sp" /> -->
+
+    </FrameLayout>
+
+</RelativeLayout>
