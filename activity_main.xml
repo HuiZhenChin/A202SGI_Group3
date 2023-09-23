@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background2">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:text="About the app"
+        android:fontFamily="@font/average"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="3dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="309dp"
+        android:layout_height="415dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/tinos"
+        android:gravity="left"
+        android:lineSpacingExtra="20sp"
+        android:text="Busy Buddy is a mobile application that acts as a task manager.The inspiration of the title comes from the thought of people nowadays being packed and busy with schedules and tasks to be completed. This application will be a great help to people by managing their tasks in priority and making sure their work is on track and manageable. This application can be used by all people around the world to manage their time for work, daily activities, or for school."
+        android:textColor="#000000"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="189dp"
+        android:layout_gravity="center_vertical|end"/>
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="back"
+        android:outlineSpotShadowColor="@color/black"
+        app:srcCompat="@drawable/baseline_cancel_24"
+        tools:layout_edindroid_absoluteX="3dp"
+        tools:layout_editor_absoluteY="144dp"
+        android:background="@drawable/backbtn_background"/>
+
+
+</RelativeLayout>
