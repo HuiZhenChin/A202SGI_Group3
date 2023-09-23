@@ -4,6 +4,7 @@ package com.example.project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -41,22 +42,34 @@ public class NewActivity extends AppCompatActivity {
     AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String> adapterItems;
 
-    String items[] = {"Choose", "Assignment", "Work", "Personal", "Create New Folder"};
-    CustomSpinnerAdapter adapter;
+    String items[] = {"Assignment", "Work", "Personal", "Create New Folder"};
 
-    Spinner savedFolderSpinner;
+    ArrayList list= new ArrayList(Arrays.asList(items));
     Button dateBtn;
     TextView selectedDateView;
+
+
+    public boolean isEnabled(int position) {
+        if (position == 0) {
+
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_task);
+        ArrayAdapter adapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, list);
+        //CustomSpinnerAdapter  adapter2 = new CustomSpinnerAdapter (this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, items);
+        Spinner savedFolderSpinner = findViewById(R.id.savedFolder);
 
-        savedFolderSpinner = findViewById(R.id.savedFolder);
-        adapter = new CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         savedFolderSpinner.setAdapter(adapter);
+     //   savedFolderSpinner.setAdapter(adapter2);
 
         RelativeLayout createTaskLayout = findViewById(R.id.createtasklayout);
         RelativeLayout folderLayout = findViewById(R.id.newfolderlayout);
@@ -64,21 +77,66 @@ public class NewActivity extends AppCompatActivity {
         savedFolderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // When an item is selected, you can perform actions here.
-                if (position == 0) {
+                //when an item is selected
+                if (position ==0) {
 
-                } else if (position == items.length - 1) {
-                    showCreateFolderDialog();
-                } else {
+                    //don't save to database
 
+                } else if (position == list.size() - 1) {   //if create new folder is selected
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(NewActivity.this);
+                    LayoutInflater inflater = getLayoutInflater();
+                    View dialogView = inflater.inflate(R.layout.create_new_folder, null);
+
+                    //constant
+                    final EditText editTextFolderName = dialogView.findViewById(R.id.newFolderName);
+
+                    final AlertDialog dialog = builder.setView(dialogView).create();
+                    Button create = dialogView.findViewById(R.id.createNewFolderBtn);
+
+                        create.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //while create is pressed
+                                String newfoldername = editTextFolderName.getText().toString().trim();
+                                if (!newfoldername.isEmpty()) {
+                                    //insert as the element above the create new folder option
+                                    int insertIndex = list.size() - 1;
+
+                                    list.add(insertIndex, newfoldername);
+                                    adapter.notifyDataSetChanged();
+                                    savedFolderSpinner.setAdapter(adapter);  //add item to the spinner
+
+                                    Toast.makeText(getApplicationContext(), "New Folder "+ newfoldername + " inserted", Toast.LENGTH_SHORT).show();
+                                }
+
+                                dialog.dismiss();
+                            }
+                        });
+
+
+                        Button cancel = dialogView.findViewById(R.id.cancelBtn);
+                        //while cancel is pressed
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View view) {
+                                dialog.dismiss();  //activity dismiss
+                            }
+                        });
+
+                    //AlertDialog dialog = builder.create();
+
+                    dialog.show();
                 }
+
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-
+                //pass
             }
         });
+
 
 
 
@@ -136,8 +194,6 @@ public class NewActivity extends AppCompatActivity {
 
 
                 Snackbar.make(findViewById(android.R.id.content), "New Task Created Successfully!", Snackbar.LENGTH_SHORT).show();
-
-
 
 
             }
@@ -209,61 +265,11 @@ public class NewActivity extends AppCompatActivity {
     }
 
 
-    public void openCreateNewFolderActivity(){
-        Intent intent = new Intent(this, CreateNewFolderActivity.class);
-        startActivity(intent);
-    }
-
-    private void showCreateFolderDialog() {
-        try {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            LayoutInflater inflater = this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.create_new_folder, null);
-
-            // Find the EditText in the custom dialog layout
-            final EditText editTextFolderName = dialogView.findViewById(R.id.newFolderName);
-
-            builder.setView(dialogView)
-                    .setPositiveButton("Create", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            try {
-                                // Handle the "Create" button click
-                                String newfoldername = editTextFolderName.getText().toString().trim();
-                                if (!newfoldername.isEmpty()) {
-                                    // Add the new folder name to your adapter
-                                    adapter.add(newfoldername);
-
-                                    // Notify the adapter that the data has changed
-                                    adapter.notifyDataSetChanged();
-
-                                    Toast.makeText(getApplicationContext(), "New Folder Inserted", Toast.LENGTH_SHORT).show();
-                                }
-                                dialog.dismiss();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                // Handle the exception here, such as showing an error message.
-                            }
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.dismiss();
-                        }
-                    });
-
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Handle the exception here, such as showing an error message.
-        }
-    }
-
-
 
 
 
 }
+
 
 
 
