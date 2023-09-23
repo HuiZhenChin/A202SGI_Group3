@@ -10,7 +10,6 @@
     android:paddingLeft="40dp"
     android:paddingTop="50dp"
     tools:context=".MainActivity">
-
     <include layout="@layout/create_new_folder" android:visibility="invisible" />
 
 
@@ -103,16 +102,21 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="489dp" />
 
-    <Spinner
-        android:id="@+id/savedFolder"
-        style="@android:style/Widget.Spinner.DropDown"
-        android:layout_width="166dp"
+    <FrameLayout
+        android:id="@+id/savedFolderContainer"
+        android:layout_width="180dp"
         android:layout_height="48dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="470dp"
-        android:background="@drawable/dropdown_border"
-        android:prompt="@string/choose_prompt"
-        android:spinnerMode="dropdown" />
+        android:background="@drawable/dropdown_border">
+
+        <Spinner
+            android:id="@+id/savedFolder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:spinnerMode="dropdown" />
+    </FrameLayout>
 
     <EditText
         android:id="@+id/titleInput"
