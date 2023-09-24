@@ -1,10 +1,9 @@
 # A202SGI_Group3
 
-Group Members:
+Chin Hui Zhen
 
-1. HuiZhenChin - Chin Hui Zhen
-2. Lian-Yu-Jia - Lian Yu Jia
-3. PehJiaXuan - Peh Jia Xuan
-4. uns3ri0us - Ng Sheng Song
+Tasks Assigned:
 
-Program Files: 
+1. Login Page 
+2. Create Tasks + Create New Folder for Tasks
+3. Priority List
