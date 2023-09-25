@@ -3,15 +3,19 @@ package com.example.project;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
@@ -27,6 +31,10 @@ public class PriorityList extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     List<String> taskList;
     SearchView searchView;
+
+    String progressitems[] = {"In Progress", "Completed"};
+
+    ArrayList list= new ArrayList(Arrays.asList(progressitems));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +68,8 @@ public class PriorityList extends AppCompatActivity {
             }
         });
 
+        //go back create task
+
         ImageButton add= findViewById(R.id.addBtn);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +77,55 @@ public class PriorityList extends AppCompatActivity {
                 openNewActivity();
             }
         });
+
+        //progress dropdown list
+        Spinner progressSpinner = findViewById(R.id.taskProgress);
+        ArrayAdapter adapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        progressSpinner.setAdapter(adapter);
+
+        progressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                //when an item is selected
+                if (position ==0) {
+
+                    //in progress
+
+                } else if (position == list.size() - 1) {
+
+                    //completed
+
+                    };
+
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                //pass
+            }
+        });
+
+
+        // Get the values from the Intent
+        Intent intent = getIntent();
+        String taskTitle = intent.getStringExtra("taskTitle");
+        String selectedDate = intent.getStringExtra("selectedDate");
+
+        // Display the values in TextViews
+        TextView titleTextView = findViewById(R.id.taskTitle);
+        TextView dateTextView = findViewById(R.id.taskDue);
+        Spinner progress= findViewById(R.id.taskProgress);
+
+        titleTextView.setText( taskTitle);
+        dateTextView.setText(selectedDate);
+
+        titleTextView.setVisibility(View.VISIBLE);
+        dateTextView.setVisibility(View.VISIBLE);
+        progress.setVisibility(View.VISIBLE);
+        //solve spinner hide problem
+        //hide priority type according to radio grp
 
     }
 
