@@ -48,6 +48,9 @@ public class NewActivity extends AppCompatActivity {
     Button dateBtn;
     TextView selectedDateView;
 
+    private EditText taskTitleEditText;
+    private TextView dateInputTextView;
+
 
     public boolean isEnabled(int position) {
         if (position == 0) {
@@ -69,10 +72,12 @@ public class NewActivity extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         savedFolderSpinner.setAdapter(adapter);
-     //   savedFolderSpinner.setAdapter(adapter2);
 
         RelativeLayout createTaskLayout = findViewById(R.id.createtasklayout);
         RelativeLayout folderLayout = findViewById(R.id.newfolderlayout);
+
+        taskTitleEditText = findViewById(R.id.titleInput);
+        dateInputTextView = findViewById(R.id.selectedDate);
 
         savedFolderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -195,11 +200,23 @@ public class NewActivity extends AppCompatActivity {
 
                 Snackbar.make(findViewById(android.R.id.content), "New Task Created Successfully!", Snackbar.LENGTH_SHORT).show();
 
+                String taskTitle = taskTitleEditText.getText().toString();
+                String selectedDate = dateInputTextView.getText().toString();
+
+                //create an Intent to start the PriorityList activity
+                Intent intent = new Intent(NewActivity.this, PriorityList.class);
+
+                //pass extra value to the intent
+                intent.putExtra("taskTitle", taskTitle);
+                intent.putExtra("selectedDate", selectedDate);
+
+                startActivity(intent);
 
             }
 
 
         });
+
 
         dateBtn = findViewById(R.id.dateInput);
         selectedDateView = findViewById(R.id.selectedDate);
@@ -257,11 +274,28 @@ public class NewActivity extends AppCompatActivity {
             }
         });
 
+        Button btn= findViewById(R.id.button);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNewActivity();
+            }
+        });
+
+
     }
+
+
 
     public void goPrevious(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void openNewActivity(){
+        Intent intent2 = new Intent(this, PriorityList.class);
+        startActivity(intent2);
     }
 
 
