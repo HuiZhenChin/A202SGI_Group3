@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ public class PriorityList extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, taskList);
         listView.setAdapter(arrayAdapter);
 
+
         // Set up the SearchView
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -79,12 +81,12 @@ public class PriorityList extends AppCompatActivity {
         });
 
         //progress dropdown list
-        Spinner progressSpinner = findViewById(R.id.taskProgress);
+        Spinner highprogressSpinner = findViewById(R.id.hightaskProgress);
         ArrayAdapter adapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        progressSpinner.setAdapter(adapter);
+        highprogressSpinner.setAdapter(adapter);
 
-        progressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        highprogressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 //when an item is selected
@@ -107,30 +109,131 @@ public class PriorityList extends AppCompatActivity {
             }
         });
 
+        Spinner lowprogressSpinner = findViewById(R.id.lowtaskProgress);
+        lowprogressSpinner.setAdapter(adapter);
 
-        // Get the values from the Intent
+        lowprogressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                //when an item is selected
+                if (position ==0) {
+
+                    //in progress
+
+                } else if (position == list.size() - 1) {
+
+                    //completed
+                };
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                //pass
+            }
+        });
+
+        Spinner medprogressSpinner = findViewById(R.id.mediumtaskProgress);
+        medprogressSpinner.setAdapter(adapter);
+
+        medprogressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                //when an item is selected
+                if (position ==0) {
+
+                    //in progress
+
+                } else if (position == list.size() - 1) {
+
+                    //completed
+                };
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                //pass
+            }
+        });
+
+
+
+        //display the values in TextViews
+
+        //high priority
+        TextView hightitleTextView = findViewById(R.id.hightaskTitle);
+        TextView highdateTextView = findViewById(R.id.hightaskDue);
+        Spinner highprogress= findViewById(R.id.hightaskProgress);
+
+        //low priority
+        TextView lowtitleTextView = findViewById(R.id.lowtaskTitle);
+        TextView lowdateTextView = findViewById(R.id.lowtaskDue);
+        Spinner lowprogress= findViewById(R.id.lowtaskProgress);
+
+        //medium priority
+        TextView medtitleTextView = findViewById(R.id.mediumtaskTitle);
+        TextView meddateTextView = findViewById(R.id.mediumtaskDue);
+        Spinner medprogress= findViewById(R.id.mediumtaskProgress);
+
+        TextView high= findViewById(R.id.highPriority);
+        TextView low= findViewById(R.id.lowPriority);
+        TextView medium= findViewById(R.id.mediumPriority);
+        TextView due= findViewById(R.id.dueTitle);
+
+        //detect what user selects in the radio group
+        String highselectedPriority = getIntent().getStringExtra("selectedHighPriority");
+        String lowselectedPriority = getIntent().getStringExtra("selectedLowPriority");
+        String mediumselectedPriority = getIntent().getStringExtra("selectedMediumPriority");
         Intent intent = getIntent();
         String taskTitle = intent.getStringExtra("taskTitle");
         String selectedDate = intent.getStringExtra("selectedDate");
+        ImageView image= findViewById(R.id.imageBee);
+        TextView message= findViewById(R.id.noTaskMessage);
 
-        // Display the values in TextViews
-        TextView titleTextView = findViewById(R.id.taskTitle);
-        TextView dateTextView = findViewById(R.id.taskDue);
-        Spinner progress= findViewById(R.id.taskProgress);
+        // Detect the selected priority and show the corresponding TextView
+        if (lowselectedPriority != null) {
+            lowtitleTextView.setText(taskTitle);
+            lowdateTextView.setText(selectedDate);
+            low.setVisibility(View.VISIBLE);
+            due.setVisibility(View.VISIBLE);
+            lowtitleTextView.setVisibility(View.VISIBLE);
+            lowdateTextView.setVisibility(View.VISIBLE);
+            lowprogress.setVisibility(View.VISIBLE);
+        }
 
-        titleTextView.setText( taskTitle);
-        dateTextView.setText(selectedDate);
+        else if (mediumselectedPriority != null) {
+            medtitleTextView.setText(taskTitle);
+            meddateTextView.setText(selectedDate);
+            medium.setVisibility(View.VISIBLE);
+            due.setVisibility(View.VISIBLE);
+            medtitleTextView.setVisibility(View.VISIBLE);
+            meddateTextView.setVisibility(View.VISIBLE);
+            medprogress.setVisibility(View.VISIBLE);
+        }
 
-        titleTextView.setVisibility(View.VISIBLE);
-        dateTextView.setVisibility(View.VISIBLE);
-        progress.setVisibility(View.VISIBLE);
-        //solve spinner hide problem
-        //hide priority type according to radio grp
+        else if (highselectedPriority!=null){
 
-    }
+            hightitleTextView.setText(taskTitle);
+            highdateTextView.setText(selectedDate);
+            high.setVisibility(View.VISIBLE);
+            due.setVisibility(View.VISIBLE);
+            hightitleTextView.setVisibility(View.VISIBLE);
+            highdateTextView.setVisibility(View.VISIBLE);
+            highprogress.setVisibility(View.VISIBLE);
+
+
+        }
+
+        else if (lowselectedPriority== null && mediumselectedPriority == null && highselectedPriority == null){
+            image.setVisibility(View.VISIBLE);
+            message.setVisibility(View.VISIBLE);
+        }
+
+
+        };
+
 
     public void openNewActivity(){
         Intent intent = new Intent(this, NewActivity.class);
         startActivity(intent);
     }
+
+
 }
