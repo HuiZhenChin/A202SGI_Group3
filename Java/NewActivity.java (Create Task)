@@ -17,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -202,15 +203,53 @@ public class NewActivity extends AppCompatActivity {
 
                 String taskTitle = taskTitleEditText.getText().toString();
                 String selectedDate = dateInputTextView.getText().toString();
+                RadioButton high= findViewById(R.id.highPrio);
+                RadioButton low= findViewById(R.id.lowPrio);
+                RadioButton medium= findViewById(R.id.mediumPrio);
 
-                //create an Intent to start the PriorityList activity
-                Intent intent = new Intent(NewActivity.this, PriorityList.class);
 
-                //pass extra value to the intent
-                intent.putExtra("taskTitle", taskTitle);
-                intent.putExtra("selectedDate", selectedDate);
+                if (high.isChecked()){
 
-                startActivity(intent);
+                    String selectedHighPriority = high.getText().toString();
+                    //create an Intent to start the PriorityList activity
+                    Intent intent = new Intent(NewActivity.this, PriorityList.class);
+
+                    //pass extra value to the intent
+                    intent.putExtra("taskTitle", taskTitle);
+                    intent.putExtra("selectedDate", selectedDate);
+                    intent.putExtra("selectedHighPriority", selectedHighPriority);
+                    startActivity(intent);
+
+                }
+
+                else if (medium.isChecked()){
+
+                    String selectedMediumPriority = medium.getText().toString();
+                    //create an Intent to start the PriorityList activity
+                    Intent intent = new Intent(NewActivity.this, PriorityList.class);
+
+                    //pass extra value to the intent
+                    intent.putExtra("taskTitle", taskTitle);
+                    intent.putExtra("selectedDate", selectedDate);
+                    intent.putExtra("selectedMediumPriority", selectedMediumPriority);
+                    startActivity(intent);
+
+                }
+
+                else if (low.isChecked()){
+
+                    String selectedLowPriority = low.getText().toString();
+                    //create an Intent to start the PriorityList activity
+                    Intent intent = new Intent(NewActivity.this, PriorityList.class);
+
+                    //pass extra value to the intent
+                    intent.putExtra("taskTitle", taskTitle);
+                    intent.putExtra("selectedDate", selectedDate);
+                    intent.putExtra("selectedLowPriority", selectedLowPriority);
+                    startActivity(intent);
+
+                }
+
 
             }
 
@@ -298,12 +337,9 @@ public class NewActivity extends AppCompatActivity {
         startActivity(intent2);
     }
 
-
-
-
+    
 
 }
-
 
 
 
