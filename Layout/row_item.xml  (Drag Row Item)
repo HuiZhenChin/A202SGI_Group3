@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="#80FFFFFF"
+    android:elevation="10dp"
+    android:foreground="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/priorityImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Priority Symbol"
+        android:paddingLeft="20dp"
+        android:src="@drawable/baseline_priority_high_24"
+        app:layout_constraintEnd_toStartOf="@+id/taskTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/taskTitle"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/varela"
+        android:paddingLeft="20dp"
+        android:text="Title"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/taskDue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/taskDue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/varela"
+        android:text="Date"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/taskProgress"
+        app:layout_constraintStart_toEndOf="@+id/taskTitle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/taskProgress"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/progressdropdown_border"
+        android:fontFamily="@font/varela"
+        android:gravity="center_vertical"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/completedImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="365dp"
+        android:contentDescription="Completed Symbol"
+        android:paddingLeft="20dp"
+        android:src="@drawable/baseline_done_all_24"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/taskProgress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
