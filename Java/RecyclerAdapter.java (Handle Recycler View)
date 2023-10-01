@@ -1,0 +1,129 @@
+package com.example.project;
+
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.WindowDecorActionBar;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import com.example.test.TaskItem;
+
+
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+
+    private List<TaskItem> itemList;
+    private Context context;
+    String progressitems[] = {"In Progress", "Completed"};
+
+
+
+    ArrayList list= new ArrayList(Arrays.asList(progressitems));
+    public RecyclerAdapter(List<TaskItem> itemList, Context context) {
+
+        this.itemList = itemList;
+        this.context= context;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //inflate item layout and create a ViewHolder
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //bind data to the ViewHolder
+        TaskItem item = itemList.get(position);
+        holder.title.setText(item.getTitle());
+        holder.due.setText(item.getDueDate());
+
+        //set the priority image based on the task's priority field
+        String prioritySymbol = item.getPrioritySymbol();
+
+        if ("High Priority".equals(prioritySymbol)) {
+            holder.priorityImage.setImageResource(R.drawable.baseline_circle_red);
+        } else if ("Medium Priority".equals(prioritySymbol)) {
+            holder.priorityImage.setImageResource(R.drawable.baseline_circle_yellow);
+        } else if ("Low Priority".equals(prioritySymbol)) {
+            holder.priorityImage.setImageResource(R.drawable.baseline_circle_green);
+        }
+
+        //progress dropdown list
+        ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        holder.progressSpinner.setAdapter(adapter);
+
+        holder.progressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                //handle Spinner item selection
+                if (position == 0) {
+                    // In progress
+                } else if (position == list.size() - 1) {
+                    // Completed
+
+                    holder.completedImage.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                //handle when nothing is selected
+            }
+        });
+
+
+    }
+
+
+
+
+    @Override
+    public int getItemCount() {
+        return itemList.size();
+    }
+
+
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        TextView title, due;
+        Spinner progressSpinner;
+
+        ImageView priorityImage, completedImage;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.taskTitle);
+            due = itemView.findViewById(R.id.taskDue);
+            progressSpinner= itemView.findViewById(R.id.taskProgress);
+            priorityImage = itemView.findViewById(R.id.priorityImage);
+            completedImage= itemView.findViewById(R.id.completedImage);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            // Handle item click
+        }
+    }
+}
