@@ -1,0 +1,30 @@
+package com.example.project;
+
+public class TaskItem {
+    private String title;
+    private String dueDate;
+
+    private String prioritySymbol;
+
+    public TaskItem(String title, String dueDate, String prioritySymbol) {
+        this.title = title;
+        this.dueDate = dueDate;
+        this.prioritySymbol= prioritySymbol;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public String getPrioritySymbol(){return prioritySymbol;}
+
+    public void setPrioritySymbol(String priority) {
+        this.prioritySymbol = priority;
+    }
+
+
+}
