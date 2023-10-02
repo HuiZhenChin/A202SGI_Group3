@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background2"
+    tools:context=".item_select_task_create">
+
+    <ImageButton
+        android:id="@+id/imageButton_task_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="back"
+        android:outlineSpotShadowColor="@color/black"
+        app:srcCompat="@drawable/baseline_cancel_24"
+        tools:layout_edindroid_absoluteX="3dp"
+        tools:layout_editor_absoluteY="144dp"
+        android:background="@drawable/backbtn_background"/>
+
+    <TextView
+        android:id="@+id/page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="3dp"
+        android:fontFamily="@font/average"
+        android:textColor="#000000"
+        android:text="How to Create List?" />
+
+    <TextView
+        android:id="@+id/task_subtitle"
+        android:layout_width="309dp"
+        android:layout_height="110dp"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/tinos"
+        android:gravity="left"
+        android:lineSpacingExtra="20sp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="189dp"
+        android:text="You may need to choose the folder at the side menu where you wish to create a sub-task and press the           button." />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/createbutton"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="215dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="280dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="280dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="10dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="280dp"
+            android:layout_height="300dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/createtask"
+            tools:ignore="ContentDescription"/>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
