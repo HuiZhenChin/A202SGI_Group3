@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background2"
+    tools:context=".item_select_list_of_features">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/average"
+        android:text="List of Features"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="3dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="309dp"
+        android:layout_height="430dp"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/tinos"
+        android:text="- Create and delete tasks\n- Calendar-based design (list the tasks due on each date)
+        \n- List-based design (create folders or sub-lists to store the task in different categories)
+        \n- Search tasks based on keywords
+        \n- Notification to store the history of the user's activity and remind the user when a due is coming soon
+        \n- Drag and drop a task to another folder if it is wrongly created previously"
+        android:gravity="left"
+        android:lineSpacingExtra="20sp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="189dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton_list_of_features"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="back"
+        android:outlineSpotShadowColor="@color/black"
+        app:srcCompat="@drawable/baseline_cancel_24"
+        tools:layout_edindroid_absoluteX="3dp"
+        tools:layout_editor_absoluteY="144dp"
+        android:background="@drawable/backbtn_background"/>
+
+
+</RelativeLayout>
