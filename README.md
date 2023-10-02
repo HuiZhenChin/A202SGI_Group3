@@ -1,10 +1,9 @@
 # A202SGI_Group3
 
-Group Members:
+Peh Jia Xuan
 
-1. HuiZhenChin - Chin Hui Zhen
-2. Lian-Yu-Jia - Lian Yu Jia
-3. PehJiaXuan - Peh Jia Xuan
-4. uns3ri0us - Ng Sheng Song
+Tasks Assigned:
 
-Program Files: 
+Frequently Asked Questions (FAQ) main page
+About the App + List of Features + Task Description + Task Creation + Task Deletion pages
+Calendar-based view page + Task creation + Priortization selection
