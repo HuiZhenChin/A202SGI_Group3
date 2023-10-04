@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="142dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="360dp"
+        android:text="Date of Birth"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="142dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="410dp"
+        android:text="Email"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="142dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="460dp"
+        android:text="Password"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="287dp"
+        android:layout_height="68dp"
+        android:layout_marginLeft="59dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/varela"
+        android:text="My Account"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/userimage"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="93dp"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="142dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="310dp"
+        android:layout_marginBottom="100dp"
+        android:text="Username"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="300dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="text"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="350dp"
+        android:ems="10"
+        android:hint="DOB"
+        android:inputType="date"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="400dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="450dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/edit_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="600dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/varela"
+        android:textColor="@drawable/btn_text_color"
+        android:onClick="change"
+        android:text="Confirm Change"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/back_to_prev"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        app:srcCompat="?attr/homeAsUpIndicator" />
+
+</RelativeLayout>
