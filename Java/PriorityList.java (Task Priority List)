@@ -1,6 +1,5 @@
 package com.example.project;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +20,15 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+//import kotlinx.coroutines.scheduling.Task;
+
 
 public class PriorityList extends AppCompatActivity  {
 
@@ -35,8 +40,8 @@ public class PriorityList extends AppCompatActivity  {
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
 
-    List<TaskItem> highList, mediumList, lowList, savedtasklist;
-
+    //list to store newly created task
+   // private List<TaskItem> savedtasklist = new ArrayList<>();
 
     String progressitems[] = {"In Progress", "Completed"};
 
@@ -54,8 +59,14 @@ public class PriorityList extends AppCompatActivity  {
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, taskList);
         listView.setAdapter(arrayAdapter);
 
+        recyclerAdapter = new RecyclerAdapter(TaskItem.savedtasklist, this);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(recyclerAdapter);
+
+
 
         //set up the SearchView
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -89,68 +100,90 @@ public class PriorityList extends AppCompatActivity  {
 
 
 
-
-
-        //display the values in TextViews
-
-
-        // TextView high= findViewById(R.id.highPriority);
-        // TextView low= findViewById(R.id.lowPriority);
-        // TextView medium= findViewById(R.id.mediumPriority);
-        //TextView due= findViewById(R.id.dueTitle);
-
         //detect what user selects in the radio group
-        String highselectedPriority = getIntent().getStringExtra("selectedHighPriority");
-        String lowselectedPriority = getIntent().getStringExtra("selectedLowPriority");
-        String mediumselectedPriority = getIntent().getStringExtra("selectedMediumPriority");
+        //String highselectedPriority = getIntent().getStringExtra("selectedHighPriority");
+       // String lowselectedPriority = getIntent().getStringExtra("selectedLowPriority");
+        //String mediumselectedPriority = getIntent().getStringExtra("selectedMediumPriority");
         Intent intent = getIntent();
         String taskTitle = intent.getStringExtra("taskTitle");
         String selectedDate = intent.getStringExtra("selectedDate");
+        String priority=intent.getStringExtra("selectedPriority");
+        TextView message= findViewById(R.id.noTaskMessage);
+        ImageView bee= findViewById(R.id.imageBee);
+
+
+        TaskItem newTaskItem = new TaskItem(taskTitle, selectedDate, priority);
+        if(taskTitle==null && selectedDate==null && priority ==null){
+            message.setVisibility(View.VISIBLE);
+            bee.setVisibility(View.VISIBLE);
+        }
+
+        else if(taskTitle!=null && selectedDate!=null && priority !=null) {
+
+            TaskItem.savedtasklist.add(newTaskItem);
+        }
+        Collections.sort(TaskItem.savedtasklist);
+        recyclerAdapter.notifyDataSetChanged();
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
+
         //TextView message= findViewById(R.id.noTaskMessage);
 
-
-
-        //detect the selected priority and show the corresponding TextView
-        if (lowselectedPriority == null && mediumselectedPriority == null && highselectedPriority == null) {
-
-            savedtasklist= new ArrayList<>();
-            savedtasklist.add(new TaskItem("Theory of Computation Test", "21-12-2023","High Priority"));
-            savedtasklist.add(new TaskItem("B Test", "23-12-2023","High Priority"));
-            savedtasklist.add(new TaskItem("C Test", "25-12-2023","High Priority"));
-            savedtasklist.add(new TaskItem("D Test", "27-12-2023","High Priority"));
-            savedtasklist.add(new TaskItem("E Test", "29-12-2023","Medium Priority"));
-            savedtasklist.add(new TaskItem("F Test", "30-12-2023","Medium Priority"));
-            savedtasklist.add(new TaskItem("G Test", "21-12-2023","Medium Priority"));
-            savedtasklist.add(new TaskItem("H Test", "21-12-2023","Low Priority"));
-            savedtasklist.add(new TaskItem("I Test", "21-12-2023","Low Priority"));
-            savedtasklist.add(new TaskItem("J Test", "21-12-2023","Low Priority"));
-            savedtasklist.add(new TaskItem("K Test", "21-12-2023","Low Priority"));
-            savedtasklist.add(new TaskItem("Cybersecurity Test", "21-12-2023","Low Priority"));
-
-
-
-            recyclerView = findViewById(R.id.recyclerView);
-            recyclerAdapter = new RecyclerAdapter(savedtasklist, this);
-            LinearLayoutManager layoutManagerHigh = new LinearLayoutManager(this);
-            recyclerView.setLayoutManager(layoutManagerHigh);
-
-            recyclerView.setAdapter(recyclerAdapter);
-
-            DividerItemDecoration highdividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-            recyclerView.addItemDecoration(highdividerItemDecoration);
-
-
-            ItemTouchHelper itemTouchHelperHigh = new ItemTouchHelper(simpleCallback);
-            itemTouchHelperHigh.attachToRecyclerView(recyclerView);
-
-
+/*
+        //when user select low difficulty
+        if(lowselectedPriority!=null){
+            savedtasklist.add(new TaskItem(taskTitle,selectedDate,"Low Priority"));
 
         }
 
-        //else if (lowselectedPriority== null && mediumselectedPriority == null && highselectedPriority == null){
+        //when user select medium difficulty
+        else if (mediumselectedPriority!=null){
+            savedtasklist.add(new TaskItem(taskTitle,selectedDate,"Medium Priority"));
 
-        // message.setVisibility(View.VISIBLE);
-        // }
+        }
+
+        //when user select high difficulty
+        else if (highselectedPriority !=null){
+            savedtasklist.add(new TaskItem(taskTitle,selectedDate,"High Priority"));
+        }
+
+
+       else if (savedtasklist.isEmpty()){
+
+           message.setVisibility(View.VISIBLE);
+           bee.setVisibility(View.VISIBLE);
+       }
+
+*/
+        //detect the selected priority and show the corresponding TextView
+        //testing purpose
+     /*   else if (lowselectedPriority == null && mediumselectedPriority == null && highselectedPriority == null) {
+
+            savedtasklist.add(new TaskItem("Theory of Computation Test", "21-12-2023", "High Priority"));
+            savedtasklist.add(new TaskItem("B Test", "23-12-2023", "High Priority"));
+            savedtasklist.add(new TaskItem("C Test", "25-12-2023", "High Priority"));
+            savedtasklist.add(new TaskItem("D Test", "27-12-2023", "High Priority"));
+            savedtasklist.add(new TaskItem("E Test", "29-12-2023", "Medium Priority"));
+            savedtasklist.add(new TaskItem("F Test", "30-12-2023", "Medium Priority"));
+            savedtasklist.add(new TaskItem("G Test", "21-12-2023", "Medium Priority"));
+            savedtasklist.add(new TaskItem("H Test", "21-12-2023", "Low Priority"));
+            savedtasklist.add(new TaskItem("I Test", "21-12-2023", "Low Priority"));
+            savedtasklist.add(new TaskItem("J Test", "21-12-2023", "Low Priority"));
+            savedtasklist.add(new TaskItem("K Test", "21-12-2023", "Low Priority"));
+            savedtasklist.add(new TaskItem("Cybersecurity Test", "21-12-2023", "Low Priority"));
+
+        }
+
+*/
+
+    //recyclerView.setAdapter(recyclerAdapter);
+    //recyclerAdapter.notifyDataSetChanged();
+
 
 
     };
@@ -161,7 +194,10 @@ public class PriorityList extends AppCompatActivity  {
         startActivity(intent);
     }
 
-    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
+    int dragDirection = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END;
+    int swipeDirection = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(dragDirection, swipeDirection) {
 
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -176,7 +212,7 @@ public class PriorityList extends AppCompatActivity  {
 
             // Determine the priority based on the drop position
             String priority;
-            if (dropPosition <= totalTasks * 0.5) {
+            if (dropPosition < totalTasks * 0.5) {
                 priority = "High Priority";
             } else if (dropPosition <= totalTasks * 0.7) {
                 priority = "Medium Priority";
@@ -185,11 +221,11 @@ public class PriorityList extends AppCompatActivity  {
             }
 
             //update the priority for the dropped task
-            TaskItem droppedItem = savedtasklist.get(fromPosition);
+            TaskItem droppedItem = TaskItem.savedtasklist.get(fromPosition);
             droppedItem.setPrioritySymbol(priority);
 
             //notify for the item move
-            Collections.swap(savedtasklist, fromPosition, toPosition);
+            Collections.swap(TaskItem.savedtasklist, fromPosition, toPosition);
             recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
 
             //update the priority image for both source and target views
@@ -207,7 +243,19 @@ public class PriorityList extends AppCompatActivity  {
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            //handle item swipe
+            //handle deletion
+
+            if (recyclerView != null) {
+                int position = viewHolder.getAdapterPosition();
+
+                TaskItem.savedtasklist.remove(position);
+
+                recyclerView.getAdapter().notifyItemRemoved(position);
+
+                Snackbar snackbar = Snackbar.make(viewHolder.itemView, "Task Deleted", Snackbar.LENGTH_SHORT);
+                snackbar.show();
+            }
+
         }
 
         private int getPriorityImageResource(String priority) {
@@ -226,5 +274,4 @@ public class PriorityList extends AppCompatActivity  {
 
 
 }
-
 
