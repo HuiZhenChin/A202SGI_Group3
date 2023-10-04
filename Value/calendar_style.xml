@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <style name="CustomDatePickerDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <!--calendar customized design -->
+        <item name="colorAccent">#170F00</item>
+        <item name="android:paddingTop">0dp</item>
+    </style>
+
+
+
+</resources>
