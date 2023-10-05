@@ -49,6 +49,7 @@ public class NewActivity extends AppCompatActivity {
     Button dateBtn;
     TextView selectedDateView;
 
+    private List<TaskItem> savedtasklist = new ArrayList<>();
     private EditText taskTitleEditText;
     private TextView dateInputTextView;
 
@@ -206,46 +207,49 @@ public class NewActivity extends AppCompatActivity {
                 RadioButton high= findViewById(R.id.highPrio);
                 RadioButton low= findViewById(R.id.lowPrio);
                 RadioButton medium= findViewById(R.id.mediumPrio);
-
+                String priority;
 
                 if (high.isChecked()){
 
-                    String selectedHighPriority = high.getText().toString();
+                   // String selectedHighPriority = high.getText().toString();
+                    priority="High Priority";
                     //create an Intent to start the PriorityList activity
                     Intent intent = new Intent(NewActivity.this, PriorityList.class);
 
                     //pass extra value to the intent
                     intent.putExtra("taskTitle", taskTitle);
                     intent.putExtra("selectedDate", selectedDate);
-                    intent.putExtra("selectedHighPriority", selectedHighPriority);
+                    intent.putExtra("selectedPriority", priority);
                     startActivity(intent);
 
                 }
 
                 else if (medium.isChecked()){
 
-                    String selectedMediumPriority = medium.getText().toString();
+                    //String selectedMediumPriority = medium.getText().toString();
+                    priority="Medium Priority";
                     //create an Intent to start the PriorityList activity
                     Intent intent = new Intent(NewActivity.this, PriorityList.class);
 
                     //pass extra value to the intent
                     intent.putExtra("taskTitle", taskTitle);
                     intent.putExtra("selectedDate", selectedDate);
-                    intent.putExtra("selectedMediumPriority", selectedMediumPriority);
+                    intent.putExtra("selectedPriority", priority);
                     startActivity(intent);
 
                 }
 
                 else if (low.isChecked()){
 
-                    String selectedLowPriority = low.getText().toString();
+                    //String selectedLowPriority = low.getText().toString();
+                    priority="Low Priority";
                     //create an Intent to start the PriorityList activity
                     Intent intent = new Intent(NewActivity.this, PriorityList.class);
 
                     //pass extra value to the intent
                     intent.putExtra("taskTitle", taskTitle);
                     intent.putExtra("selectedDate", selectedDate);
-                    intent.putExtra("selectedLowPriority", selectedLowPriority);
+                    intent.putExtra("selectedPriority", priority);
                     startActivity(intent);
 
                 }
@@ -313,14 +317,6 @@ public class NewActivity extends AppCompatActivity {
             }
         });
 
-        Button btn= findViewById(R.id.button);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openNewActivity();
-            }
-        });
 
 
     }
@@ -337,9 +333,7 @@ public class NewActivity extends AppCompatActivity {
         startActivity(intent2);
     }
 
-    
+
 
 }
-
-
 
