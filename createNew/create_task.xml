@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createtasklayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:paddingLeft="40dp"
+    android:paddingTop="50dp"
+    tools:context=".MainActivity">
+    <include layout="@layout/create_new_folder" android:visibility="invisible" />
+
+
+    <LinearLayout
+
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="122dp"
+        android:orientation="vertical" />
+
+    <TextView
+        android:id="@+id/titleCreateTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="10dp"
+
+        android:text="New Task"
+        android:textColor="#000000"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <TextView
+        android:id="@+id/taskTitle"
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="60dp"
+
+        android:text="Title"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="136dp" />
+
+    <TextView
+        android:id="@+id/scheduleTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="150dp"
+
+        android:text="Schedule Time"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="224dp" />
+
+    <TextView
+        android:id="@+id/difficulty"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="250dp"
+
+        android:text="Difficulty"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="331dp" />
+
+    <TextView
+        android:id="@+id/note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="330dp"
+
+        android:text="Notes"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="421dp" />
+
+    <TextView
+        android:id="@+id/saveTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="430dp"
+
+        android:text="Save To"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="489dp" />
+
+    <FrameLayout
+        android:id="@+id/savedFolderContainer"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="470dp"
+        android:background="@drawable/ddd">
+
+        <Spinner
+            android:id="@+id/savedFolder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:spinnerMode="dropdown" />
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/titleInput"
+        android:layout_width="319dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="90dp"
+        android:ems="10"
+        android:hint="Enter Task Title"
+        android:inputType="text"
+        android:textColorHint="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/selectedDate"
+        android:layout_width="319dp"
+        android:layout_height="41dp"
+        android:layout_centerInParent="false"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="195dp"
+        android:background="@drawable/ddd"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+
+        android:text="Date"
+        android:textAlignment="textStart"
+
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/dateInput"
+        android:layout_width="290dp"
+        android:layout_height="48dp"
+        android:layout_centerInParent="false"
+        android:layout_centerVertical="false"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="185dp"
+        android:background="@drawable/ddd"
+        android:hint="Choose Date"
+        android:textAllCaps="false"
+        android:textColorHint="@color/white" />
+
+    <EditText
+        android:id="@+id/noteInput"
+        android:layout_width="324dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginTop="370dp"
+        android:ems="10"
+
+        android:gravity="start|top"
+        android:hint="Important Notes"
+        android:inputType="textMultiLine"
+        android:textColorHint="@color/white"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/createTask"
+        android:layout_width="255dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="540dp"
+        android:background="@drawable/ddd"
+        android:onClick="sendMessage"
+
+        android:text="Create New Task"
+        android:textColor="@drawable/ddd"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginTop="280dp"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/lowPrio"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/mediumPrio"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/highPrio"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+
+
+                android:textSize="14sp" />
+        </RadioGroup>
+
+
+        <ImageView
+            android:id="@+id/errorIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
