@@ -6,4 +6,4 @@ Tasks Assigned:
 
 1. Login Page 
 2. Create Tasks + Create New Folder for Tasks
-3. Priority List (Search Bar + Drag and Drop)
+3. Priority List (Search Bar + Drag and Drop + Swipe to Delete + Symbol Changes for Priority Modification)
