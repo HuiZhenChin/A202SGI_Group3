@@ -1,11 +1,13 @@
 package com.example.project;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,22 +18,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private List<TaskItem> itemList;
+    private List<TaskItem> filteredlist;
     private Context context;
     String progressitems[] = {"In Progress", "Completed"};
-
-
-
     ArrayList list= new ArrayList(Arrays.asList(progressitems));
+
+    String items[] = {"Assignment", "Work", "Personal", "Create New Folder"};
+
+    ArrayList list2= new ArrayList(Arrays.asList(items));
     public RecyclerAdapter(List<TaskItem> itemList, Context context) {
 
         this.itemList = itemList;
         this.context= context;
+        this.filteredlist = new ArrayList<>(itemList);
     }
+
+    public void setFilteredList(List<TaskItem> filteredlist) {
+        this.filteredlist = filteredlist;
+        notifyDataSetChanged(); // Notify the adapter of the data change
+    }
+
+
+
 
     @NonNull
     @Override
@@ -44,9 +58,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //bind data to the ViewHolder
-        TaskItem item = itemList.get(position);
+        TaskItem item = filteredlist.get(position);
         holder.title.setText(item.getTitle());
         holder.due.setText(item.getDueDate());
+        holder.savedfolder.setText(item.getFolder());
+
+        //holder.savedfolder.setVisibility(View.VISIBLE);
+        //holder.savedfoldernew.setVisibility(View.INVISIBLE);
 
         //set the priority image based on the task's priority field
         String prioritySymbol = item.getPrioritySymbol();
@@ -84,33 +102,92 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             }
         });
 
+        ArrayAdapter adapter2 = new ArrayAdapter(context, android.R.layout.simple_spinner_item, list2);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        holder.folderSpinner.setAdapter(adapter2);
+
+
+        holder.folderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                //handle Spinner item selection
+                String selectedText = (String) parentView.getItemAtPosition(position);
+
+                // Set the selected text to the savedfolder TextView
+                holder.savedfoldernew.setText(selectedText);
+               // holder.savedfolder.setVisibility(View.INVISIBLE);
+               // holder.savedfoldernew.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                //handle when nothing is selected
+            }
+        });
+
+
 
     }
 
-
+/*
+    @Override
+    public int getItemCount() {
+        return filteredlist.size();
+    }
+*/
 
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        return filteredlist.size();
+    }
+
+
+    //filter the search results
+    public void filter(String text) {
+        // Clear the filtered list
+        filteredlist.clear();
+
+        // Filter the items based on the search text
+        for (TaskItem taskItem : itemList) {
+            if (taskItem.getTitle().toLowerCase().contains(text.toLowerCase())) {
+                filteredlist.add(taskItem);
+            }
+        }
+
+        // Notify the adapter that the data has changed
+        notifyDataSetChanged();
     }
 
 
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView title, due;
-        Spinner progressSpinner;
+        TextView title, due, savedfolder, savedfoldernew;
+        Spinner progressSpinner, folderSpinner;
 
         ImageView priorityImage, completedImage;
+
+        ImageButton showspinner;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.taskTitle);
             due = itemView.findViewById(R.id.taskDue);
+            savedfolder= itemView.findViewById(R.id.folderview);
+            savedfoldernew=itemView.findViewById(R.id.folderviewnew);
+            showspinner=itemView.findViewById(R.id.showSpinnerButton);
             progressSpinner= itemView.findViewById(R.id.taskProgress);
+            folderSpinner= itemView.findViewById(R.id.chosenFolder);
             priorityImage = itemView.findViewById(R.id.priorityImage);
             completedImage= itemView.findViewById(R.id.completedImage);
+            showspinner.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    folderSpinner.performClick();
+                }
+            });
             itemView.setOnClickListener(this);
         }
 
