@@ -1,16 +1,19 @@
 package com.example.project;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,18 +30,20 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-//import kotlinx.coroutines.scheduling.Task;
 
 
 public class PriorityList extends AppCompatActivity  {
 
     ListView listView;
     ArrayAdapter<String> arrayAdapter;
+    List<TaskItem> itemList = new ArrayList<>(); // Initialize the list with your data
+
     List<String> taskList;
     SearchView searchView;
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, recyclerViewMenu;
     RecyclerAdapter recyclerAdapter;
+    MenuAdapter menuAdapter;
 
     //list to store newly created task
    // private List<TaskItem> savedtasklist = new ArrayList<>();
@@ -54,18 +59,17 @@ public class PriorityList extends AppCompatActivity  {
 
         listView = findViewById(R.id.searchList);
         searchView = findViewById(R.id.searchView);
+        searchView.clearFocus();
 
-        taskList = new ArrayList<>(Arrays.asList("Data Science", "Theory of Computation", "Cybersecurity", "Quiz", "Test", "Android Development Project", "Big Data Programming Project", "Advanced Algorithm Viva", "Software Engineering Project"));
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, taskList);
-        listView.setAdapter(arrayAdapter);
-
+       // taskList = new ArrayList<>(Arrays.asList("Data Science", "Theory of Computation", "Cybersecurity", "Quiz", "Test", "Android Development Project", "Big Data Programming Project", "Advanced Algorithm Viva", "Software Engineering Project"));
+        //arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, taskList);
+        recyclerAdapter = new RecyclerAdapter(itemList, this);
+        //listView.setAdapter(recyclerAdapter);
         recyclerAdapter = new RecyclerAdapter(TaskItem.savedtasklist, this);
-
         recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerAdapter);
-
 
 
         //set up the SearchView
@@ -78,12 +82,8 @@ public class PriorityList extends AppCompatActivity  {
             @Override
             public boolean onQueryTextChange(String newText) {
                 // Filter the ListView as the user types
-                if (TextUtils.isEmpty(newText)) {
-                    listView.setVisibility(View.INVISIBLE); // Hide ListView when search is empty
-                } else {
-                    listView.setVisibility(View.VISIBLE); // Show ListView when search is active
-                    arrayAdapter.getFilter().filter(newText);
-                }
+                filterlist(newText);
+
                 return true;
             }
         });
@@ -108,18 +108,25 @@ public class PriorityList extends AppCompatActivity  {
         String taskTitle = intent.getStringExtra("taskTitle");
         String selectedDate = intent.getStringExtra("selectedDate");
         String priority=intent.getStringExtra("selectedPriority");
+        String selectedFolder = intent.getStringExtra("selectedFolder");
         TextView message= findViewById(R.id.noTaskMessage);
         ImageView bee= findViewById(R.id.imageBee);
+        //intent.putExtra("title", taskTitle);
+        //save data to SharedPreferences and pass to MenuActivity
+        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("title", taskTitle);
+        editor.putString("folder", selectedFolder);
+        editor.apply();
 
 
-        TaskItem newTaskItem = new TaskItem(taskTitle, selectedDate, priority);
-        if(taskTitle==null && selectedDate==null && priority ==null){
+        if(taskTitle==null && selectedDate==null && priority ==null && selectedFolder ==null){
             message.setVisibility(View.VISIBLE);
             bee.setVisibility(View.VISIBLE);
         }
 
-        else if(taskTitle!=null && selectedDate!=null && priority !=null) {
-
+        else if(taskTitle!=null && selectedDate!=null && priority !=null && selectedFolder!=null) {
+            TaskItem newTaskItem = new TaskItem(taskTitle, selectedDate, priority, selectedFolder);
             TaskItem.savedtasklist.add(newTaskItem);
         }
         Collections.sort(TaskItem.savedtasklist);
@@ -130,6 +137,9 @@ public class PriorityList extends AppCompatActivity  {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+
+
 
 
         //TextView message= findViewById(R.id.noTaskMessage);
@@ -185,12 +195,28 @@ public class PriorityList extends AppCompatActivity  {
     //recyclerAdapter.notifyDataSetChanged();
 
 
-
     };
 
+    private void filterlist(String text){
+        List<TaskItem> filteredlist= new ArrayList<>();
+        for (TaskItem taskItem: TaskItem.savedtasklist){
+            if(taskItem.getTitle().toLowerCase().contains(text.toLowerCase())){
+                filteredlist.add(taskItem);
+            }
+        }
+
+        if (recyclerAdapter != null) {
+            recyclerAdapter.setFilteredList(filteredlist);
+        }
+    }
 
     public void openNewActivity(){
         Intent intent = new Intent(this, NewActivity.class);
+        startActivity(intent);
+    }
+
+    public void openNewActivity2(){
+        Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 
@@ -248,13 +274,30 @@ public class PriorityList extends AppCompatActivity  {
             if (recyclerView != null) {
                 int position = viewHolder.getAdapterPosition();
 
-                TaskItem.savedtasklist.remove(position);
+                if (position >= 0 && position < TaskItem.savedtasklist.size()) {
+                    String removedTitle = TaskItem.savedtasklist.get(position).getTitle();
 
-                recyclerView.getAdapter().notifyItemRemoved(position);
 
-                Snackbar snackbar = Snackbar.make(viewHolder.itemView, "Task Deleted", Snackbar.LENGTH_SHORT);
-                snackbar.show();
+                    for (int i = 0; i < MenuItemModel.menulist.size(); i++) {
+                        if (MenuItemModel.menulist.get(i).getTitle().equals(removedTitle)) {
+                            MenuItemModel.menulist.remove(i);
+
+                            menuAdapter.notifyItemRemoved(i);
+                            break;
+                        }
+                    }
+
+                    // Remove the task from savedtasklist
+                    TaskItem.savedtasklist.remove(position);
+
+
+                    recyclerAdapter.notifyItemRemoved(position);
+
+                    Snackbar snackbar = Snackbar.make(viewHolder.itemView, "Task Deleted", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                }
             }
+
 
         }
 
