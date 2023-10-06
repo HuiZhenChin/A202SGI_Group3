@@ -109,24 +109,25 @@ public class PriorityList extends AppCompatActivity  {
         String selectedDate = intent.getStringExtra("selectedDate");
         String priority=intent.getStringExtra("selectedPriority");
         String selectedFolder = intent.getStringExtra("selectedFolder");
+        String note= intent.getStringExtra("note");
         TextView message= findViewById(R.id.noTaskMessage);
         ImageView bee= findViewById(R.id.imageBee);
         //intent.putExtra("title", taskTitle);
         //save data to SharedPreferences and pass to MenuActivity
-        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("title", taskTitle);
-        editor.putString("folder", selectedFolder);
-        editor.apply();
+       // SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+       // SharedPreferences.Editor editor = preferences.edit();
+        //editor.putString("title", taskTitle);
+       // editor.putString("folder", selectedFolder);
+        //editor.apply();
 
 
-        if(taskTitle==null && selectedDate==null && priority ==null && selectedFolder ==null){
+        if(taskTitle==null && selectedDate==null && priority ==null ){
             message.setVisibility(View.VISIBLE);
             bee.setVisibility(View.VISIBLE);
         }
 
-        else if(taskTitle!=null && selectedDate!=null && priority !=null && selectedFolder!=null) {
-            TaskItem newTaskItem = new TaskItem(taskTitle, selectedDate, priority, selectedFolder);
+        else if(taskTitle!=null && selectedDate!=null && priority !=null ) {
+            TaskItem newTaskItem = new TaskItem(taskTitle, selectedDate, priority, selectedFolder, note);
             TaskItem.savedtasklist.add(newTaskItem);
         }
         Collections.sort(TaskItem.savedtasklist);
@@ -317,4 +318,5 @@ public class PriorityList extends AppCompatActivity  {
 
 
 }
+
 
