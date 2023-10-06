@@ -1,10 +1,7 @@
-# A202SGI_Group3
+Lian Yu Jia
 
-Group Members:
+Tasks Assigned:
 
-1. HuiZhenChin - Chin Hui Zhen
-2. Lian-Yu-Jia - Lian Yu Jia
-3. PehJiaXuan - Peh Jia Xuan
-4. uns3ri0us - Ng Sheng Song
-
-Program Files: 
+FAQ (about us, notification, contact us)
+Side Menu
+Display Recycler View Items (Task Details)
