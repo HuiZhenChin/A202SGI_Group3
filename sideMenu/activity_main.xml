@@ -1,0 +1,41 @@
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <include
+        android:id="@+id/displayfolder"
+        layout="@layout/display_folder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        android:background="#170F00"
+        app:itemTextColor="#EBEBEB"
+        app:itemIconTint="#EBEBEB"
+        app:menu="@menu/activity_main_drawer">
+
+        <Button
+            android:id="@+id/logOut"
+            android:layout_width="104sp"
+            android:layout_height="48sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="640dp"
+            android:background="@drawable/loginbtn_border"
+            android:text="Log Out"
+            android:textColor="@drawable/loginbtn_text_color"
+            android:textSize="16sp" />
+
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>
