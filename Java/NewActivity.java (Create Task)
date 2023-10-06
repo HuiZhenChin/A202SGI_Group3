@@ -50,7 +50,7 @@ public class NewActivity extends AppCompatActivity {
     TextView selectedDateView;
 
     private List<TaskItem> savedtasklist = new ArrayList<>();
-    private EditText taskTitleEditText;
+    private EditText taskTitleEditText, noteEditText;
     private TextView dateInputTextView;
 
 
@@ -80,6 +80,7 @@ public class NewActivity extends AppCompatActivity {
 
         taskTitleEditText = findViewById(R.id.titleInput);
         dateInputTextView = findViewById(R.id.selectedDate);
+        noteEditText= findViewById(R.id.noteInput);
 
         savedFolderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -209,6 +210,7 @@ public class NewActivity extends AppCompatActivity {
                 String taskTitle = taskTitleEditText.getText().toString();
                 String selectedDate = dateInputTextView.getText().toString();
                 String selectedFolder= savedFolderSpinner.getSelectedItem().toString();
+                String note= noteEditText.getText().toString();
                 RadioButton high= findViewById(R.id.highPrio);
                 RadioButton low= findViewById(R.id.lowPrio);
                 RadioButton medium= findViewById(R.id.mediumPrio);
@@ -225,6 +227,7 @@ public class NewActivity extends AppCompatActivity {
                     intent.putExtra("taskTitle", taskTitle);
                     intent.putExtra("selectedDate", selectedDate);
                     intent.putExtra("selectedPriority", priority);
+                    intent.putExtra("note",note);
                     intent.putExtra("selectedFolder", selectedFolder);
                     startActivity(intent);
 
@@ -241,6 +244,7 @@ public class NewActivity extends AppCompatActivity {
                     intent.putExtra("taskTitle", taskTitle);
                     intent.putExtra("selectedDate", selectedDate);
                     intent.putExtra("selectedPriority", priority);
+                    intent.putExtra("note",note);
                     intent.putExtra("selectedFolder", selectedFolder);
                     startActivity(intent);
 
@@ -257,6 +261,7 @@ public class NewActivity extends AppCompatActivity {
                     intent.putExtra("taskTitle", taskTitle);
                     intent.putExtra("selectedDate", selectedDate);
                     intent.putExtra("selectedPriority", priority);
+                    intent.putExtra("note",note);
                     intent.putExtra("selectedFolder", selectedFolder);
                     startActivity(intent);
 
@@ -344,6 +349,9 @@ public class NewActivity extends AppCompatActivity {
 
 
 }
+
+
+
 
 
 
