@@ -63,7 +63,7 @@
         android:layout_height="170dp"
         android:layout_marginLeft="120dp"
         android:layout_marginTop="93dp"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        app:srcCompat="@drawable/cat" />
 
     <TextView
         android:id="@+id/textView2"
@@ -93,12 +93,14 @@
         android:layout_centerInParent="false"
         android:layout_marginLeft="170dp"
         android:layout_marginTop="350dp"
-        android:background="@drawable/dateview_border"
         android:fontFamily="@font/varela"
+        android:background="@drawable/dateview_border"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:text="test"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:textColor="@color/btn_color"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/dateInput"
@@ -149,15 +151,15 @@
 
     <Button
         android:id="@+id/createTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="285dp"
+        android:layout_width="104sp"
+        android:layout_height="48sp"
+        android:layout_marginLeft="270dp"
         android:layout_marginTop="600dp"
         android:background="@drawable/button"
         android:fontFamily="@font/varela"
         android:textColor="@drawable/btn_text_color"
         android:text="Sign Up"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:onClick="Signup"/>
 
 </RelativeLayout>
