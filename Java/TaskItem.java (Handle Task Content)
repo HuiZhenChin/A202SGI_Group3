@@ -8,6 +8,8 @@ public class TaskItem implements Comparable<TaskItem> {
 
     private String prioritySymbol;
 
+    private String folder;
+
     public static ArrayList<TaskItem> savedtasklist = new ArrayList<>();
 
     public static ArrayList<TaskItem> a() {
@@ -21,10 +23,11 @@ public class TaskItem implements Comparable<TaskItem> {
 
     }
 
-    public TaskItem(String title, String dueDate, String prioritySymbol) {
+    public TaskItem(String title, String dueDate, String prioritySymbol, String folder) {
         this.title = title;
         this.dueDate = dueDate;
         this.prioritySymbol= prioritySymbol;
+        this.folder= folder;
     }
 
     @Override
@@ -48,6 +51,10 @@ public class TaskItem implements Comparable<TaskItem> {
     }
 
     public String getPrioritySymbol(){return prioritySymbol;}
+
+    public String getFolder(){return folder;}
+
+    public void setFolder(String folder){this.folder= folder;}
 
     public void setPrioritySymbol(String priority) {
         this.prioritySymbol = priority;
