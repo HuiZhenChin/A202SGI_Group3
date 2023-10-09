@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background2"
+    tools:context=".item_select_contact_us">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/average"
+        android:text="Contact Us"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="3dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="347dp"
+        android:layout_height="122dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/tinos"
+        android:gravity="left"
+        android:justificationMode="inter_word"
+        android:text="If you encounter any problem while using the application, you may contact the helpdesk:"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="189dp"
+        android:lineSpacingExtra="20sp"/>
+
+    <ImageButton
+        android:id="@+id/imageButton_contact_us"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="back"
+        app:srcCompat="@drawable/baseline_cancel_24"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="144dp"
+        android:background="@drawable/backbtn_background"/>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="270dp"
+        android:background="@drawable/container_border">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            app:srcCompat="@drawable/baseline_whatsapp_24" />
+
+        <TextView
+            android:id="@+id/phoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/average"
+            android:text="016-1094972"
+            android:textColor="#333333"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/average"
+            android:text="info@busybuddy.com "
+            android:textColor="#333333"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            app:srcCompat="@drawable/baseline_email_24" />
+
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="347dp"
+        android:layout_height="122dp"
+        android:layout_marginLeft="50dp"
+        android:fontFamily="@font/tinos"
+        android:layout_marginTop="440dp"
+        android:gravity="left"
+        android:justificationMode="inter_word"
+        android:text="We would appreciate if you could send your feedback to us for further enhancement of the application."
+        android:textColor="#000000"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="189dp"
+        android:lineSpacingExtra="20sp"/>
+
+
+</RelativeLayout>
