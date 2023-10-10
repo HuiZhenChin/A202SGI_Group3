@@ -1,120 +1,77 @@
-package com.example.faq;
+package com.example.calendarview;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static com.example.calendarview.CalendarUtils.daysInMonthArray;
+import static com.example.calendarview.CalendarUtils.monthYearFromDate;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
-    String[] item = {"About the App", "List of Features"};
-    String[] item1 = {"Notifications"};
-    String[] item2 = {"Tasks", "How to Create List?", "How to Delete List?"};
-    String[] item3 = {"Contact Us"};
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-    AutoCompleteTextView autoCompleteTextView;
-    AutoCompleteTextView autoCompleteTextView1;
-    AutoCompleteTextView autoCompleteTextView2;
-    AutoCompleteTextView autoCompleteTextView3;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
-    ArrayAdapter<String> adapterItems;
-    ArrayAdapter<String> adapterItems1;
-    ArrayAdapter<String> adapterItems2;
-    ArrayAdapter<String> adapterItems3;
+public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
+{
+    private TextView monthYearText;
+    private RecyclerView calendarRecyclerView;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initWidgets();
+        CalendarUtils.selectedDate = LocalDate.now();
+        setMonthView();
+    }
 
-        autoCompleteTextView = findViewById(R.id.auto_complete_txt);
-        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, item);
+    private void initWidgets()
+    {
+        calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
+        monthYearText = findViewById(R.id.monthYearTV);
+    }
 
-        autoCompleteTextView.setAdapter(adapterItems);
+    private void setMonthView()
+    {
+        monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
+        ArrayList<LocalDate> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
 
-        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
+        calendarRecyclerView.setLayoutManager(layoutManager);
+        calendarRecyclerView.setAdapter(calendarAdapter);
+    }
 
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String item = adapterView.getItemAtPosition(i).toString();
-                if(item.equals("About the App"))
-                {
-                    Intent intent = new Intent(MainActivity.this, item_select_about_the_app.class);
-                    startActivity(intent);
-                }
-                else if(item.equals("List of Features"))
-                {
-                    Intent intent1 = new Intent(MainActivity.this, item_select_list_of_features.class);
-                    startActivity(intent1);
-                }
-            }
-        });
+    public void previousMonthAction(View view)
+    {
+        CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
+        setMonthView();
+    }
 
-        autoCompleteTextView1 = findViewById(R.id.auto_complete_txt1);
-        adapterItems1 = new ArrayAdapter<String>(this, R.layout.list_item, item1);
+    public void nextMonthAction(View view)
+    {
+        CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
+        setMonthView();
+    }
 
-        autoCompleteTextView1.setAdapter(adapterItems1);
+    @Override
+    public void onItemClick(int position, LocalDate date)
+    {
+        if(date != null)
+        {
+            CalendarUtils.selectedDate = date;
+            setMonthView();
+        }
+    }
 
-        autoCompleteTextView1.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String item1 = adapterView.getItemAtPosition(i).toString();
-                if(item1.equals("Notifications"))
-                {
-                    Intent intent2 = new Intent(MainActivity.this, item_select_notifications.class);
-                    startActivity(intent2);
-                }
-            }
-        });
-
-        autoCompleteTextView2 = findViewById(R.id.auto_complete_txt2);
-        adapterItems2 = new ArrayAdapter<String>(this, R.layout.list_item, item2);
-
-        autoCompleteTextView2.setAdapter(adapterItems2);
-
-        autoCompleteTextView2.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String item2 = adapterView.getItemAtPosition(i).toString();
-                if(item2.equals("Tasks"))
-                {
-                    Intent intent3 = new Intent(MainActivity.this, item_select_task_description.class);
-                    startActivity(intent3);
-                }
-                else if(item2.equals("How to Create List?"))
-                {
-                    Intent intent4 = new Intent(MainActivity.this, item_select_task_create.class);
-                    startActivity(intent4);
-                }
-                else if(item2.equals("How to Delete List?"))
-                {
-                    Intent intent5 = new Intent(MainActivity.this, item_select_task_delete.class);
-                    startActivity(intent5);
-                }
-            }
-        });
-
-        autoCompleteTextView3 = findViewById(R.id.auto_complete_txt3);
-        adapterItems3 = new ArrayAdapter<String>(this, R.layout.list_item, item3);
-
-        autoCompleteTextView3.setAdapter(adapterItems3);
-
-        autoCompleteTextView3.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String item3 = adapterView.getItemAtPosition(i).toString();
-                if(item3.equals("Contact Us"))
-                {
-                    Intent intent6 = new Intent(MainActivity.this, item_select_contact_us.class);
-                    startActivity(intent6);
-                }
-            }
-        });
+    public void weeklyAction(View view)
+    {
+        startActivity(new Intent(this, WeekViewActivity.class));
     }
 }
