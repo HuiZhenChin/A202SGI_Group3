@@ -29,26 +29,26 @@ public class CalendarUtils
         return date.format(formatter);
     }
 
-    public static ArrayList<LocalDate> daysInMonthArray(LocalDate date)
+    public static ArrayList<LocalDate> daysMonthArray(LocalDate date)
     {
-        ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
+        ArrayList<LocalDate> daysMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
 
-        int daysInMonth = yearMonth.lengthOfMonth();
+        int daysMonth = yearMonth.lengthOfMonth();
         LocalDate firstOfMonth = CalendarUtils.selectedDate.withDayOfMonth(1);
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
+        int daysWeek = firstOfMonth.getDayOfWeek().getValue();
 
         for(int i = 1; i <= 42; i++)
         {
-            if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
-                daysInMonthArray.add(null);
+            if(i <= daysWeek || i > daysMonth + daysWeek)
+                daysMonthArray.add(null);
             else
-                daysInMonthArray.add(LocalDate.of(selectedDate.getYear(),selectedDate.getMonth(),i - dayOfWeek));
+                daysMonthArray.add(LocalDate.of(selectedDate.getYear(),selectedDate.getMonth(),i - daysWeek));
         }
-        return  daysInMonthArray;
+        return  daysMonthArray;
     }
 
-    public static ArrayList<LocalDate> daysInWeekArray(LocalDate selectedDate)
+    public static ArrayList<LocalDate> daysWeekArray(LocalDate selectedDate)
     {
         ArrayList<LocalDate> days = new ArrayList<>();
         LocalDate current = sundayForDate(selectedDate);
@@ -64,9 +64,9 @@ public class CalendarUtils
 
     private static LocalDate sundayForDate(LocalDate current)
     {
-        LocalDate oneWeekAgo = current.minusWeeks(1);
+        LocalDate oneWeekPrevious = current.minusWeeks(1);
 
-        while (current.isAfter(oneWeekAgo))
+        while (current.isAfter(oneWeekPrevious))
         {
             if(current.getDayOfWeek() == DayOfWeek.SUNDAY)
                 return current;
