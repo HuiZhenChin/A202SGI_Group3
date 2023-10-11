@@ -1,6 +1,6 @@
 package com.example.calendarview;
 
-import static com.example.calendarview.CalendarUtils.daysInWeekArray;
+import static com.example.calendarview.CalendarUtils.daysWeekArray;
 import static com.example.calendarview.CalendarUtils.monthYearFromDate;
 
 import android.content.Intent;
@@ -41,7 +41,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     private void setWeekView()
     {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
-        ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
+        ArrayList<LocalDate> days = daysWeekArray(CalendarUtils.selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
