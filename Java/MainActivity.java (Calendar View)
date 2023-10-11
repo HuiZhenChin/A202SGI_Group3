@@ -1,6 +1,6 @@
 package com.example.calendarview;
 
-import static com.example.calendarview.CalendarUtils.daysInMonthArray;
+import static com.example.calendarview.CalendarUtils.daysMonthArray;
 import static com.example.calendarview.CalendarUtils.monthYearFromDate;
 
 import android.content.Intent;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     private void setMonthView()
     {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
-        ArrayList<LocalDate> daysInMonth = daysInMonthArray(CalendarUtils.selectedDate);
+        ArrayList<LocalDate> daysInMonth = daysMonthArray(CalendarUtils.selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
