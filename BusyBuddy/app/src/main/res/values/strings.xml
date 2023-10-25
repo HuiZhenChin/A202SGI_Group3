@@ -45,8 +45,8 @@
     <string name="select1">Notifications</string>
     <string name="select2">Tasks</string>
     <string name="select3">Contact Us</string>
-
-
+    <string name="back">&lt;</string>
+    <string name="forward"> &gt; </string>
 
 
 </resources>
