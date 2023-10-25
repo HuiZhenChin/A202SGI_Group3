@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="savedFolder_dropdown">
+        <item>Choose...</item>
+        <item>Assignment</item>
+        <item>Work</item>
+        <item>Personal</item>
+        <item>Create New Folder</item>
+    </string-array>
+    </resources>
+
