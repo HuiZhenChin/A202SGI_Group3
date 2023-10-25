@@ -24,6 +24,9 @@
 
         <activity android:name=".NewActivity"></activity>
         <activity android:name=".PriorityList"></activity>
+        <activity android:name=".CalendarActivity"></activity>
+        <activity android:name=".EventEditActivity"></activity>
+        <activity android:name=".WeekViewActivity"></activity>
         <activity android:name=".MenuActivity"></activity>
         <activity android:name=".DisplayFolder"></activity>
         <activity android:name=".SignUpActivity"></activity>
