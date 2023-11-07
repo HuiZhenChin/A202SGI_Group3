@@ -1,10 +1,12 @@
 # A202SGI_Group3
 
-Group Members:
+Ng Sheng Song
 
-1. HuiZhenChin - Chin Hui Zhen
-2. Lian-Yu-Jia - Lian Yu Jia
-3. PehJiaXuan - Peh Jia Xuan
-4. uns3ri0us - Ng Sheng Song
+Tasks Assigned:
 
-Program Files: 
+1. Sign Up Page
+2. Login (Database Connection)
+3. Forgot Password
+4. My Account Preview + Edit My Account Information
+5. Notifications
+
