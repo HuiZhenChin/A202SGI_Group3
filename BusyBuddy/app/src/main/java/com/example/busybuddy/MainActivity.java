@@ -1,146 +1,173 @@
 package com.example.busybuddy;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.busybuddy.R;
-import com.example.busybuddy.databinding.ActivityMainBinding;
-import com.google.android.material.navigation.NavigationView;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 
 
-public class MainActivity extends AppCompatActivity {
+public class DBManager {
+    private DB db;
+    private Context context;
+    private SQLiteDatabase database;
 
-    private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainBinding binding;
+    public DBManager(Context c) {
 
-    private boolean isMenuExpanded = false;
+        context = c;
+    }
 
-    private RecyclerView recyclerView;
-    private MenuAdapter menuAdapter;
-
-    private DrawerLayout drawerLayout;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+    public DBManager open() throws SQLException {
+        db = new DB(context);
+        database = db.getWritableDatabase();
 
 
-        DrawerLayout drawer = binding.drawerLayout;
-        drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-       // mAppBarConfiguration = new AppBarConfiguration.Builder(
-               // R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-               // .setOpenableLayout(drawer)
-              //  .build();
-       // NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-      //  NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-       // NavigationUI.setupWithNavController(navigationView, navController);
-        navigationView = findViewById(R.id.nav_view); // Replace with the actual ID of your NavigationView
-        Menu menu = navigationView.getMenu();
+        return this;
+    }
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout,  R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+    public void close() {
+        db.close();
+    }
 
+    public boolean nameCheck(String user){
+        Cursor cursor = database.rawQuery("Select * from " + DB.TABLE_NAME + " where " +
+                DB.USERNAME + " = ?", new String[]{user});
+        if (cursor.getCount() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-              if (id == R.id.folder) {
-                  openFolder();
-              }else if (id== R.id.prioritylist){
-                  openPriority();
-              }else if(id== R.id.calendar){
-                  openCalendar();
-              }else if (id==R.id.notification){
-                  openNotification();
-              }else if (id==R.id.faq){
-                  openFAQ();
-              }else if(id==R.id.profile){
-                  openProfile();
-              }
-                drawer.closeDrawer(GravityCompat.START);
-                //actionbar.setDisplayHomeAsUpEnabled(true);
-                return true;
+    // new user sign up
+    public void register(String username, String mail, String password, String dob, String phrase) {
+        ContentValues registerNew = new ContentValues();
+        registerNew.put(DB.USERNAME, username);
+        registerNew.put(DB.DOB, dob);
+        registerNew.put(DB.PASS, password);
+        registerNew.put(DB.EMAIL, mail);
+        registerNew.put(DB.PHRASE, phrase);
+        database.insert(DB.TABLE_NAME, null, registerNew);
+    }
+
+    // user login
+    public boolean login(String username, String password) {
+        String[] columns = {DB.USER_ID};
+        String selection = DB.USERNAME + " = ?";
+        String[] selectionArgs = {username};
+        String storedPassword="";
+        Cursor cursor = database.query(DB.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            // if the username exists, now check if the password matches
+            int userIdIndex = cursor.getColumnIndex(DB.USER_ID);
+            if (userIdIndex != -1) {
+                int userId = cursor.getInt(userIdIndex);
+                cursor.close();
+
+                // check if the provided password matches the one in the database
+                String[] passwordColumns = {DB.PASS};
+                String passwordSelection = DB.USER_ID + " = ?";
+
+                String[] passwordSelectionArgs = {String.valueOf(userId)};
+
+                Cursor passwordCursor = database.query(DB.TABLE_NAME, passwordColumns, passwordSelection, passwordSelectionArgs, null, null, null);
+
+                if (passwordCursor != null && passwordCursor.moveToFirst()) {
+                    int passwordIndex = passwordCursor.getColumnIndex(DB.PASS);
+                    if (passwordIndex != -1) {
+                        storedPassword = passwordCursor.getString(passwordIndex);
+                        passwordCursor.close();
+
+                        if (password.equals(storedPassword)) {
+                            // if password matches, login successful
+                            return true;
+                        }
+                    }
+                    passwordCursor.close();
+                }
             }
-        });
+            cursor.close();
+        }
 
-        Button logout = findViewById(R.id.logOut);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+
+        // username doesn't exist or password doesn't match
+        return false;
+    }
+
+    // get user ID based on current logged-in username
+    public int getUserID(String username) {
+        Cursor cursor = database.rawQuery("SELECT " + DB.USER_ID + " FROM " + DB.TABLE_NAME +
+                " WHERE " + DB.USERNAME + " = ? ", new String[]{username});
+
+        int userId = 0;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int userIdIndex = cursor.getColumnIndex(DB.USER_ID);
+            if (userIdIndex != -1) {
+                userId = cursor.getInt(userIdIndex);
             }
-        });
+            cursor.close();
+        } else {
+            userId = -1;
+        }
 
-
+        return userId;
     }
 
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-*/
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+    // fetch current logged-in user for display user information
+    public Cursor fetchUser(int userID) {
+        String[] columns = {DB.USERNAME, DB.DOB, DB.PASS, DB.EMAIL, DB.PHRASE};
+        String selection = DB.USER_ID + " = ?";
+        String[] selectionArgs = {String.valueOf(userID)};
+        return database.query(DB.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
     }
 
-    private void openFolder() {
-        Intent intent = new Intent(this, DisplayFolder.class);
-        startActivity(intent);
+    // validate whether user is in the database by finding user with username and phrase
+    public boolean validateUser(String user, String phrase) {
+        String selection = DB.USERNAME + " = ? AND " + DB.PHRASE + "= ?";
+        String[] selectionArgs = {String.valueOf(user), String.valueOf(phrase)};
+        Cursor cursor = database.query(DB.TABLE_NAME, null, selection, selectionArgs, null, null, null);
+        if (cursor.getCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    private void openPriority() {
-        Intent intent = new Intent(this, PriorityList.class);
-        startActivity(intent);
+    public void ActivityLog(String message, int userid, String date) {
+        ContentValues createNew = new ContentValues();
+        createNew.put(DB.USER_ID, userid);
+        createNew.put(DB.MESSAGE, message);
+        createNew.put(DB.MESSAGE_DATE, date);
+        database.insert(DB.TABLE_NAME5, null, createNew);
     }
 
-    private void openFAQ() {
-        Intent intent = new Intent(this, FaqMain.class);
-        startActivity(intent);
+    public Cursor fetchActivity(int userID) {
+        String[] columns = {DB.MESSAGE};
+        String selection = DB.USER_ID + " = ?";
+        String[] selectionArgs = {String.valueOf(userID)};
+        return database.query(DB.TABLE_NAME5, columns, selection, selectionArgs, null, null, null);
     }
 
-    private void openProfile() {
-        Intent intent = new Intent(this, MyAccount.class);
-        startActivity(intent);
+    public int resetPass(long _id, String password) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DB.PASS, password);
+        int i = database.update(DB.TABLE_NAME, contentValues, DB.USER_ID + " = " + _id, null);
+        return i;
     }
 
-    private void openNotification() {
-        Intent intent = new Intent(this, ShowNotification.class);
-        startActivity(intent);
-    }
 
-    private void openCalendar() {
-        Intent intent = new Intent(this, CalendarActivity.class);
-        startActivity(intent);
+    // update user information (Edit My Account)
+    public int update(long _id, String username, String mail, String password, String dob, String phrase) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DB.USERNAME, username);
+        contentValues.put(DB.DOB, dob);
+        contentValues.put(DB.PASS, password);
+        contentValues.put(DB.EMAIL, mail);
+        contentValues.put(DB.PHRASE, phrase);
+        int i = database.update(DB.TABLE_NAME, contentValues, DB.USER_ID + " = " + _id, null);
+        return i;
     }
-}
