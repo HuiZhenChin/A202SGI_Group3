@@ -171,3 +171,70 @@ public class DBManager {
         int i = database.update(DB.TABLE_NAME, contentValues, DB.USER_ID + " = " + _id, null);
         return i;
     }
+
+
+    // task
+
+    // update task priority while dragging
+    public void updateTaskPriority(int taskId, String newPriority, int newNo ) {
+
+        ContentValues values = new ContentValues();
+        values.put(DB.DIFFICULTY, newPriority);
+        values.put(DB.DIFFICULTY_NO, newNo);
+        database.update(DB.TABLE_NAME2, values, DB.TASK_ID + " = " + taskId, null);
+
+    }
+
+    // insert the newly created task information
+    public void createtask(String tasktitle, String duedate, String difficulty, int difficultyNo, int listPos,String folder, String note, String status, int userid) {
+        ContentValues createNew = new ContentValues();
+        createNew.put(DB.TASK, tasktitle);
+        createNew.put(DB.DUE_DATE, duedate);
+        createNew.put(DB.DIFFICULTY, difficulty);
+        createNew.put(DB.DIFFICULTY_NO, difficultyNo);
+        createNew.put(DB.LIST_POSITION, listPos);
+        createNew.put(DB.FOLDER, folder);
+        createNew.put(DB.USER_ID, userid);
+        createNew.put(DB.NOTE, note);
+        createNew.put(DB.STATUS, status);
+        database.insert(DB.TABLE_NAME2, null, createNew);
+    }
+
+    // display the task from database based on user ID
+    public Cursor displayTask(int userID) {
+        String[] columns = {DB.TASK_ID, DB.TASK, DB.DUE_DATE, DB.DIFFICULTY, DB.DIFFICULTY_NO, DB.FOLDER, DB.NOTE, DB.STATUS};
+        String selection = DB.USER_ID + " = ?";
+        String[] selectionArgs = {String.valueOf(userID)};
+        String orderBy = DB.NEW_POSITION + " ASC"; // arranged and ordered by new position
+        return database.query(DB.TABLE_NAME2, columns, selection, selectionArgs, null, null, orderBy);
+    }
+
+    // get the task ID based on title and due date (choose due date as another criteria because sometimes the task title will be the same)
+    public int getTaskIdByTitleAndDate(String title, String date) {
+        db.getWritableDatabase();
+        String[] columns = {DB.TASK_ID};
+
+        // define the table and the WHERE clause to find the task by title and date
+        String table = DB.TABLE_NAME2;
+        String whereClause = DB.TASK + " = ? AND " + DB.DUE_DATE + " = ?";
+        String[] whereArgs = {title, date};
+
+        // retrieve the task's ID
+        Cursor cursor = database.query(table, columns, whereClause, whereArgs, null, null, null);
+
+        int taskId = 0;
+        if (cursor != null && cursor.moveToFirst()) {
+            int taskIdIndex = cursor.getColumnIndex(DB.TASK_ID);
+            if (taskIdIndex != -1) {
+                taskId = cursor.getInt(taskIdIndex);
+            }
+            cursor.close();
+        } else {
+            taskId = -1;
+        }
+
+        // close database connection
+        cursor.close();
+
+        return taskId;
+    }
