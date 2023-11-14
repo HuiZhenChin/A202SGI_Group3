@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background2">
 
-
-
+    <!-- Used for FAQ -->
+    <!-- Contact Us Title -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -22,6 +22,7 @@
         tools:layout_editor_absoluteX="3dp"
         tools:layout_editor_absoluteY="3dp" />
 
+    <!-- message -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="347dp"
@@ -38,6 +39,7 @@
         tools:layout_editor_absoluteY="189dp"
         android:lineSpacingExtra="20sp"/>
 
+    <!-- exit button -->
     <ImageButton
         android:id="@+id/imageButton_contact_us"
         android:layout_width="wrap_content"
@@ -54,10 +56,11 @@
         android:id="@+id/container"
         android:layout_width="250dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="270dp"
         android:background="@drawable/container_border">
 
+        <!-- phone call icon -->
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
@@ -66,30 +69,33 @@
             android:layout_marginTop="12dp"
             app:srcCompat="@drawable/baseline_phone_24" />
 
+        <!-- contact number -->
         <TextView
             android:id="@+id/phoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/average"
             android:text="016-1094972"
             android:textColor="#333333"
             android:textSize="20dp"
             android:textStyle="bold" />
 
+        <!-- email -->
         <TextView
             android:id="@+id/Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/average"
             android:text="info@busybuddy.com "
             android:textColor="#333333"
             android:textSize="18dp"
             android:textStyle="bold" />
 
+        <!-- email icon -->
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
@@ -101,6 +107,7 @@
 
     </FrameLayout>
 
+    <!-- message -->
     <TextView
         android:id="@+id/textView3"
         android:layout_width="347dp"
