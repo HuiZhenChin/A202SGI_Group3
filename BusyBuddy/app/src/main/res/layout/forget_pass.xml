@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Used for Reset Password -->
+    <!-- instructions -->
     <TextView
         android:id="@+id/instruction"
         android:layout_width="wrap_content"
@@ -14,8 +16,9 @@
         android:textSize="24dp"
         android:textColor="@color/black"/>
 
+    <!-- username input -->
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/userText"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_gravity="center_vertical|end"
@@ -23,8 +26,9 @@
         android:layout_marginTop="150dp"
         android:hint="Username" />
 
+    <!-- phrase input -->
     <EditText
-        android:id="@+id/phraseEditText"
+        android:id="@+id/phraseText"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_gravity="center_vertical|end"
@@ -32,6 +36,7 @@
         android:layout_marginTop="250dp"
         android:hint="Phrase" />
 
+    <!-- confirm button -->
     <Button
         android:id="@+id/confirmButton"
         android:layout_width="300dp"
@@ -39,7 +44,7 @@
         android:layout_gravity="center_vertical|end"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
-        android:layout_below="@id/phraseEditText"
+        android:layout_below="@id/phraseText"
         android:text="Confirm"
         android:textColor="@color/white"
         android:background="@drawable/loginbtn_border"/>
