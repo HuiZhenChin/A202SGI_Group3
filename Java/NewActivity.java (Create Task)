@@ -41,6 +41,7 @@ public class NewActivity extends AppCompatActivity {
     TextView selectedDateView;
     private EditText taskTitleEditText, noteEditText;
     private TextView dateInputTextView;
+    String usernameValue = "";
 
 
     @Override
@@ -385,6 +386,7 @@ public class NewActivity extends AppCompatActivity {
     // direct to Priority List
     public void goPrevious(){
         Intent intent = new Intent(this, PriorityList.class);
+        intent.putExtra("usernameValue", usernameValue);
         startActivity(intent);
     }
 
@@ -396,6 +398,15 @@ public class NewActivity extends AppCompatActivity {
 
 
 }
+
+
+
+
+
+
+
+
+
 
 
 
