@@ -4,11 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShowNotification">
+    tools:context=".ShowNotification"
+    android:background="@drawable/background2">
 
+    <!-- Used for Notifications -->
+    <!-- exit button -->
+    <ImageButton
+        android:id="@+id/menuBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/menu_background"
+        android:contentDescription="back"
+        android:src="@drawable/baseline_format_list_bulleted_24" />
+
+    <!-- Page Title -->
+    <TextView
+        android:id="@+id/page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/average"
+        android:text="Notifications"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="3dp" />
+
+    <!-- mark as read button -->
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:padding="4dp"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/loginbtn_border"
+        android:text="Mark As Read"
+        android:textColor="@drawable/loginbtn_text_color" />
+
+    <!-- notifications message recycler view -->
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notification_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/notificationview"/>
+        android:layout_marginTop="90dp" />
+
 
 </RelativeLayout>
