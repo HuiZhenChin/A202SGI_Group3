@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background1">
+
+    <!-- Used for Welcome Page (Home Page) -->
+    <!-- welcome text -->
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="334dp"
+        android:layout_height="81dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="120dp"
+        android:fontFamily="@font/varela"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:text="Welcome buddy!"
+        android:textColor="#FAF8F8"
+        android:textSize="36dp" />
+
+    <!-- navigation drawer guidelines -->
+    <TextView
+        android:id="@+id/pressmessage"
+        android:layout_width="228dp"
+        android:layout_height="81dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="570dp"
+        android:fontFamily="@font/average"
+        android:text="(pull right) Open the navigation drawer to start your journey ~~ "
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <!-- bee image -->
+    <ImageView
+        android:id="@+id/beeimage"
+        android:layout_width="174dp"
+        android:layout_height="160dp"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="540dp"
+        app:srcCompat="@drawable/beeimage2" />
+
+    <!-- message -->
+    <TextView
+        android:id="@+id/welcomeText2"
+        android:layout_width="328dp"
+        android:layout_height="46dp"
+        android:layout_below="@id/welcomeText"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/varela"
+        android:text="@string/message"
+        android:textColor="#000000"
+        android:textSize="22dp" />
+
+</RelativeLayout>
