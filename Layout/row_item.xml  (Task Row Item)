@@ -8,6 +8,8 @@
     android:elevation="10dp"
     android:foreground="?attr/selectableItemBackground">
 
+    <!-- Used for Priority List (Display Task) Recycler View Row Design -->
+    <!-- priority colour symbol -->
     <ImageView
         android:id="@+id/priorityImage"
         android:layout_width="40dp"
@@ -20,6 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- task title -->
     <TextView
         android:id="@+id/taskTitle"
         android:layout_width="136dp"
@@ -36,6 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- task due date -->
     <TextView
         android:id="@+id/taskDue"
         android:layout_width="136dp"
@@ -50,6 +54,7 @@
         app:layout_constraintStart_toEndOf="@+id/taskTitle"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- task status spinner -->
     <Spinner
         android:id="@+id/taskProgress"
         android:layout_width="123dp"
@@ -63,6 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- task status (Completed) symbol -->
     <ImageView
         android:id="@+id/completedImage"
         android:layout_width="40dp"
@@ -76,10 +82,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- folder spinner icon -->
     <ImageButton
         android:id="@+id/showSpinnerButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/menu_background"
         android:contentDescription="spinner"
         android:onClick="showSpinner"
@@ -87,7 +95,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/chosenFolder" />
 
-
+    <!-- text -->
     <TextView
         android:id="@+id/textview"
         android:layout_width="107dp"
@@ -101,6 +109,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/folderview" />
 
+    <!-- selected task folder -->
     <TextView
         android:id="@+id/folderview"
         android:layout_width="138dp"
@@ -113,29 +122,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/taskProgress" />
 
-    <TextView
-        android:id="@+id/folderviewnew"
-        android:layout_width="157dp"
-        android:layout_height="58dp"
-        android:fontFamily="@font/varela"
-        android:gravity="center_vertical"
-        android:text="Folder"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/taskProgress" />
-
+    <!-- folder spinner to change folder -->
     <Spinner
         android:id="@+id/chosenFolder"
         android:layout_width="98dp"
         android:layout_height="55dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/progressdropdown_border"
         android:fontFamily="@font/varela"
         android:gravity="center_vertical"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/taskProgress" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
