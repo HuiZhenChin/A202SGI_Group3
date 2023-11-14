@@ -126,3 +126,144 @@ public class DB extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
+
+
+     // delete task function (swipe to delete)
+    public void deletetask(int _id) {
+        SQLiteDatabase database = this.getWritableDatabase();  // write the changes on the database
+
+        database.beginTransaction();
+        try {
+            database.delete(DB.TABLE_NAME2, DB.TASK_ID + " = ?", new String[]{String.valueOf(_id)});
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            // Handle the exception, log it, or throw it if necessary
+        } finally {
+            database.endTransaction();
+            database.close();
+        }
+    }
+
+    // get task current status (In Progress/ Completed)
+    public String getSelectedStatus() {
+
+        String selectedStatus = "";
+
+        SQLiteDatabase db = this.getReadableDatabase();  // read from database
+        Cursor cursor = db.rawQuery("SELECT status FROM TASK", null);
+        if (cursor.moveToFirst()) {
+            selectedStatus = cursor.getString(0);
+        }
+        cursor.close();
+        db.close();
+
+        return selectedStatus;
+    }
+
+    // get task recent folder
+    public String getSelectedFolder() {
+        String selectedFolder = "";
+
+        SQLiteDatabase db = this.getReadableDatabase();  // read from database
+        String query = "SELECT folder FROM TASK ";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            selectedFolder = cursor.getString(0);
+        }
+
+        cursor.close();
+        db.close();
+
+        return selectedFolder;
+    }
+
+    // update new task status from In Progress to Completed or from Completed to In Progress (in case user feels to change)
+    public void updateTaskStatus(int taskId, String status) {
+        SQLiteDatabase db = this.getWritableDatabase();  // write to database
+        ContentValues values = new ContentValues();
+        values.put(DB.STATUS, status);
+        db.update(DB.TABLE_NAME2, values, DB.TASK_ID + " = " + taskId, null);
+        db.close();
+    }
+
+    // update new task folder (after user change the task folder)
+    public void updateTaskFolder(int taskID, String folder) {
+        SQLiteDatabase db = this.getWritableDatabase(); // write to database
+        ContentValues values = new ContentValues();
+        values.put(FOLDER, folder);
+        db.update(TABLE_NAME2, values, "taskID=?", new String[]{String.valueOf(taskID)});
+        db.close();
+    }
+
+     // update the position order of the task after drag and drop
+    public void updateOrder(long taskID, int newPos) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(NEW_POSITION, newPos);
+        String whereClause = TASK_ID + " = ?";
+        String[] whereArgs = { String.valueOf(taskID) };
+        db.update(TABLE_NAME2, values, whereClause, whereArgs);
+        db.close();
+    }
+
+    // get the task ID based on title and due date (choose due date as another criteria because sometimes the task title will be the same)
+    public int getTaskIdByTitleAndDate(String title, String date) {
+        SQLiteDatabase db = this.getReadableDatabase(); // read from database
+
+        String[] columns = {DB.TASK_ID};
+        String table = DB.TABLE_NAME2;
+        String whereClause = DB.TASK + " = ? AND " + DB.DUE_DATE + " = ?";
+        String[] whereArgs = {title, date};
+
+        Cursor cursor = null;
+        int taskId = -1; // task ID = -1 if the task is not found
+
+        try {
+            cursor = db.query(table, columns, whereClause, whereArgs, null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                int taskIdIndex = cursor.getColumnIndex(DB.TASK_ID);
+                if (taskIdIndex != -1) {
+                    taskId = cursor.getInt(taskIdIndex);
+                }
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return taskId;
+    }
+
+     // check if "Not required folder" already exist
+    public boolean isFolderExist(String folderName, int userID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT COUNT(*) FROM " + DB.TABLE_NAME4 +
+                    " WHERE " + DB.FOLDER_NAME + " = ? AND " + DB.USER_ID + " = ?";
+            cursor = db.rawQuery(query, new String[]{folderName, String.valueOf(userID)});
+
+            // move the cursor to the first row
+            if (cursor.moveToFirst()) {
+                // get the count from the query result
+                int count = cursor.getInt(0);
+                return count > 0; // if count > 0, the folder exists; otherwise, it does not exist
+            }
+        } finally {
+
+            if (cursor != null) {
+                cursor.close();
+            }
+            // close the database connection
+            db.close();
+        }
+
+        return false; // if something went wrong, assume the folder does not exist
+    }
+
+    
