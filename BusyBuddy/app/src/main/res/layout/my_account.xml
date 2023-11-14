@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background1">
 
+    <!-- Used for My Account -->
+    <!-- date of birth title -->
     <TextView
         android:id="@+id/textView3"
         android:layout_width="142dp"
@@ -15,6 +17,7 @@
         android:text="Date of Birth"
         android:textSize="20sp" />
 
+    <!-- email title -->
     <TextView
         android:id="@+id/textView4"
         android:layout_width="142dp"
@@ -24,6 +27,7 @@
         android:text="Email"
         android:textSize="20sp" />
 
+    <!-- password title -->
     <TextView
         android:id="@+id/textView6"
         android:layout_width="142dp"
@@ -33,18 +37,18 @@
         android:text="Password"
         android:textSize="20sp" />
 
-
+    <!-- Page Title -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="287dp"
         android:layout_height="68dp"
-        android:layout_marginLeft="59dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/varela"
         android:text="My Account"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="50sp"
+        android:textSize="44dp"
         android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
@@ -56,6 +60,7 @@
         app:cardCornerRadius="70dp"
         app:cardElevation="4dp">
 
+        <!-- default profile picture for user -->
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="170dp"
@@ -66,6 +71,7 @@
 
     </androidx.cardview.widget.CardView>
 
+    <!-- username title -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="142dp"
@@ -76,50 +82,86 @@
         android:text="Username"
         android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/username"
+    <!-- phrase title -->
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="142dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="510dp"
+        android:layout_marginBottom="100dp"
+        android:text="Phrase"
+        android:textSize="20sp" />
+
+    <!-- phrase text -->
+    <TextView
+        android:id="@+id/showPhrase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="170dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="510dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Phrase"
         android:inputType="text"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 
-    <EditText
+    <!-- username text -->
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="142dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="310dp"
+        android:layout_marginBottom="100dp"
+        android:text="Username"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <!-- date of birth text -->
+    <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="170dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="360dp"
         android:ems="10"
         android:hint="DOB"
         android:inputType="date"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 
-    <EditText
+    <!-- email text -->
+    <TextView
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="170dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="410dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 
-    <EditText
+    <!-- password text -->
+    <TextView
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="170dp"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="460dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 
+    <!-- edit button -->
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -131,12 +173,16 @@
         android:text="Edit"
         android:textColor="@drawable/loginbtn_text_color" />
 
-    <ImageView
+    <!-- exit button -->
+    <ImageButton
         android:id="@+id/back_to_prev"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="61dp"
+        android:layout_height="68dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        app:srcCompat="?attr/homeAsUpIndicator" />
+        android:layout_marginTop="25dp"
+        android:background="@drawable/menu_background"
+        android:contentDescription="back"
+        android:src="@drawable/baseline_format_list_bulleted_24"
+        app:tint="@color/white" />
 
 </RelativeLayout>
