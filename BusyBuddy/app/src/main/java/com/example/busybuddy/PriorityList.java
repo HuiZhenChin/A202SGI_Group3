@@ -41,6 +41,7 @@ public class PriorityList extends AppCompatActivity  {
     RecyclerAdapter recyclerAdapter;
     private DBManager dbManager;
     private DB db;
+    String usernameValue = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class PriorityList extends AppCompatActivity  {
 
         // get username and password value
         Intent intentLogin = getIntent();
-        String usernameValue = intentLogin.getStringExtra("usernameValue");
+        usernameValue = intentLogin.getStringExtra("usernameValue");
         String passwordValue = intentLogin.getStringExtra("passwordValue");
 
         // get the current task status and folder
@@ -262,6 +263,7 @@ public class PriorityList extends AppCompatActivity  {
     // return to Main Page
     public void goMain(){
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("usernameValue", usernameValue);
         startActivity(intent);
     }
 
@@ -393,6 +395,9 @@ public class PriorityList extends AppCompatActivity  {
 
 
 }
+
+
+
 
 
 
