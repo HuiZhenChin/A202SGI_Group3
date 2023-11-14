@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,11 +9,12 @@
     android:paddingLeft="40dp"
     android:paddingTop="50dp"
     tools:context=".MainActivity">
+
+    <!-- include Create New Folder layout for dialog box -->
     <include layout="@layout/create_new_folder" android:visibility="invisible" />
 
-
+    <!-- Used for NewActivity (Create New Task) -->
     <LinearLayout
-
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,6 +23,7 @@
         android:layout_marginTop="122dp"
         android:orientation="vertical" />
 
+    <!-- Page Title -->
     <TextView
         android:id="@+id/titleCreateTask"
         android:layout_width="wrap_content"
@@ -37,6 +38,7 @@
         tools:layout_editor_absoluteX="160dp"
         tools:layout_editor_absoluteY="79dp" />
 
+    <!-- Title -->
     <TextView
         android:id="@+id/taskTitle"
         android:layout_width="77dp"
@@ -50,6 +52,7 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="136dp" />
 
+    <!-- Due date -->
     <TextView
         android:id="@+id/scheduleTime"
         android:layout_width="wrap_content"
@@ -63,6 +66,7 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="224dp" />
 
+    <!-- Difficulty/ Priority -->
     <TextView
         android:id="@+id/difficulty"
         android:layout_width="118dp"
@@ -76,6 +80,7 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="331dp" />
 
+    <!-- Notes -->
     <TextView
         android:id="@+id/note"
         android:layout_width="wrap_content"
@@ -89,6 +94,7 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="421dp" />
 
+    <!-- Saved Folder -->
     <TextView
         android:id="@+id/saveTo"
         android:layout_width="wrap_content"
@@ -110,6 +116,7 @@
         android:layout_marginTop="470dp"
         android:background="@drawable/dropdown_border">
 
+        <!-- saved folder spinner -->
         <Spinner
             android:id="@+id/savedFolder"
             android:layout_width="match_parent"
@@ -118,6 +125,7 @@
             android:spinnerMode="dropdown" />
     </FrameLayout>
 
+    <!-- title input -->
     <EditText
         android:id="@+id/titleInput"
         android:layout_width="319dp"
@@ -131,6 +139,7 @@
         android:textColorHint="@color/btn_color"
         android:textSize="16sp" />
 
+    <!-- selected date view -->
     <TextView
         android:id="@+id/selectedDate"
         android:layout_width="319dp"
@@ -147,6 +156,7 @@
         android:textColor="@color/btn_color"
         android:textSize="16sp" />
 
+    <!-- date input button -->
     <Button
         android:id="@+id/dateInput"
         android:layout_width="290dp"
@@ -160,6 +170,7 @@
         android:textAllCaps="false"
         android:textColorHint="@color/background1" />
 
+    <!-- notes input -->
     <EditText
         android:id="@+id/noteInput"
         android:layout_width="324dp"
@@ -174,6 +185,7 @@
         android:textColorHint="@color/btn_color"
         android:textSize="16sp" />
 
+    <!-- Create New Task button -->
     <Button
         android:id="@+id/createTask"
         android:layout_width="255dp"
@@ -193,12 +205,14 @@
         android:layout_marginTop="280dp"
         android:orientation="horizontal">
 
+        <!-- radio buttons for difficulty/ priority selections -->
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:orientation="horizontal">
 
+            <!-- low priority -->
             <RadioButton
                 android:id="@+id/lowPrio"
                 android:layout_width="wrap_content"
@@ -207,6 +221,7 @@
                 android:text="@string/low"
                 android:textSize="14sp" />
 
+            <!-- medium priority -->
             <RadioButton
                 android:id="@+id/mediumPrio"
                 android:layout_width="wrap_content"
@@ -215,6 +230,7 @@
                 android:text="@string/medium"
                 android:textSize="14sp" />
 
+            <!-- high priority -->
             <RadioButton
                 android:id="@+id/highPrio"
                 android:layout_width="wrap_content"
@@ -224,6 +240,7 @@
                 android:textSize="14sp" />
         </RadioGroup>
 
+        <!-- error message -->
         <TextView
             android:id="@+id/errortext"
             android:layout_width="50dp"
@@ -233,6 +250,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
+        <!-- error message icon -->
         <ImageView
             android:id="@+id/errorIcon"
             android:layout_width="24dp"
@@ -244,6 +262,7 @@
 
     </LinearLayout>
 
+    <!-- exit button -->
     <ImageButton
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
@@ -253,5 +272,6 @@
         android:background="@drawable/back_button"
         android:contentDescription="back"
         android:src="@drawable/baseline_cancel_24" />
+
 
 </RelativeLayout>
