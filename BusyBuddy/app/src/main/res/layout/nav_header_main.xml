@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+    <!-- Used for Navigation Drawer -->
     <androidx.cardview.widget.CardView
         android:layout_width="84dp"
         android:layout_height="87dp"
@@ -16,6 +17,7 @@
         app:cardCornerRadius="70dp"
         app:cardElevation="4dp">
 
+        <!-- default profile picture for user -->
         <ImageView
             android:id="@+id/profilepic"
             android:layout_width="match_parent"
@@ -25,6 +27,7 @@
 
     </androidx.cardview.widget.CardView>
 
+    <!-- greetings -->
     <TextView
         android:layout_width="79dp"
         android:layout_height="wrap_content"
@@ -36,6 +39,7 @@
         android:textColor="#161515"
         android:textSize="22dp" />
 
+    <!-- username text -->
     <TextView
         android:id="@+id/usernameDisplay"
         android:layout_width="wrap_content"
@@ -44,7 +48,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/varela"
         android:text="@string/name"
-        android:textColor="#161515"
+        android:textColor="#FFF9C6"
         android:textSize="22dp" />
 
 </LinearLayout>
