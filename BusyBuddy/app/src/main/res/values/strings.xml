@@ -5,11 +5,6 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
 
     <!--SIGN UP-->
     <string name="signUp">
@@ -29,10 +24,12 @@
         <b>HIGH</b>
     </string>
 
+    <!-- FORGOT PASSWORD -->
     <string name="password">
         <i>Forgot Password?</i>
     </string>
 
+    <!-- NAVIGATION DRAWER GREETINGS -->
     <string name="hello">
         <b>Hi, </b>
     </string>
@@ -41,10 +38,18 @@
         <b>Name </b>
     </string>
 
+    <!-- WELCOME PAGE -->
+    <string name="message">
+    <i>&quot;Your hive for productivity.&quot;</i>
+    </string>
+
+    <!-- FAQ -->
     <string name="select">About the App</string>
     <string name="select1">Notifications</string>
     <string name="select2">Tasks</string>
     <string name="select3">Contact Us</string>
+
+    <!-- CALENDAR -->
     <string name="back">&lt;</string>
     <string name="forward"> &gt; </string>
 
