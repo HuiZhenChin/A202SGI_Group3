@@ -1,173 +1,165 @@
 package com.example.busybuddy;
 
-import android.content.ContentValues;
-import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class DBManager {
-    private DB db;
-    private Context context;
-    private SQLiteDatabase database;
+import com.example.busybuddy.R;
+import com.example.busybuddy.databinding.ActivityMainBinding;
+import com.google.android.material.navigation.NavigationView;
 
-    public DBManager(Context c) {
+// Main Activity (Welcome Page and Navigation Drawer)
+public class MainActivity extends AppCompatActivity {
 
-        context = c;
-    }
+    private AppBarConfiguration mAppBarConfiguration;
+    private ActivityMainBinding binding;
+    private DrawerLayout drawerLayout;
+    private DBManager dbManager;
+    TextView displayUser;  // display username on the navigation drawer
+    int userId;
 
-    public DBManager open() throws SQLException {
-        db = new DB(context);
-        database = db.getWritableDatabase();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        return this;
-    }
+        Intent intentLogin = getIntent();
+        dbManager = new DBManager(this);  // open the database
+        dbManager.open();
 
-    public void close() {
-        db.close();
-    }
+        // get the username and password to pass to other pages
+        String usernameValue = intentLogin.getStringExtra("usernameValue");
+        String passwordValue = intentLogin.getStringExtra("passwordValue");
 
-    public boolean nameCheck(String user){
-        Cursor cursor = database.rawQuery("Select * from " + DB.TABLE_NAME + " where " +
-                DB.USERNAME + " = ?", new String[]{user});
-        if (cursor.getCount() > 0){
-            return true;
+        NavigationView navigationView = binding.navView;
+
+        // notification dot to trigger user that there is an unread message
+        ImageView notifyDot= findViewById(R.id.dot);
+        userId = dbManager.getUserID(usernameValue);
+        Cursor cursor = dbManager.fetchUnreadActivity(userId);
+
+        if(cursor.getCount() > 0){
+            notifyDot.setVisibility(View.VISIBLE);
         }
         else{
-            return false;
+            notifyDot.setVisibility(View.INVISIBLE);
         }
-    }
 
-    // new user sign up
-    public void register(String username, String mail, String password, String dob, String phrase) {
-        ContentValues registerNew = new ContentValues();
-        registerNew.put(DB.USERNAME, username);
-        registerNew.put(DB.DOB, dob);
-        registerNew.put(DB.PASS, password);
-        registerNew.put(DB.EMAIL, mail);
-        registerNew.put(DB.PHRASE, phrase);
-        database.insert(DB.TABLE_NAME, null, registerNew);
-    }
 
-    // user login
-    public boolean login(String username, String password) {
-        String[] columns = {DB.USER_ID};
-        String selection = DB.USERNAME + " = ?";
-        String[] selectionArgs = {username};
-        String storedPassword="";
-        Cursor cursor = database.query(DB.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        // find the header view within the NavigationView
+        View headerView = navigationView.getHeaderView(0);
 
-        if (cursor != null && cursor.moveToFirst()) {
-            // if the username exists, now check if the password matches
-            int userIdIndex = cursor.getColumnIndex(DB.USER_ID);
-            if (userIdIndex != -1) {
-                int userId = cursor.getInt(userIdIndex);
-                cursor.close();
+        // find the TextView with the ID usernameDisplay within the header view
+        displayUser = headerView.findViewById(R.id.usernameDisplay);
+        displayUser.setText(usernameValue);  // display the username on the navigation drawer
 
-                // check if the provided password matches the one in the database
-                String[] passwordColumns = {DB.PASS};
-                String passwordSelection = DB.USER_ID + " = ?";
+        DrawerLayout drawer = binding.drawerLayout;
+        drawerLayout = findViewById(R.id.drawer_layout);
 
-                String[] passwordSelectionArgs = {String.valueOf(userId)};
+        // pull to open the navigation drawer, and push to close
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout,  R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
-                Cursor passwordCursor = database.query(DB.TABLE_NAME, passwordColumns, passwordSelection, passwordSelectionArgs, null, null, null);
+        // item navigation to respective pages
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                // Display Folder
+              if (id == R.id.folder) {
+                  Intent intentLogin = new Intent(MainActivity.this, DisplayFolder.class);
+                  intentLogin.putExtra("usernameValue", usernameValue);
+                  intentLogin.putExtra("passwordValue", passwordValue);
+                  startActivity(intentLogin);
 
-                if (passwordCursor != null && passwordCursor.moveToFirst()) {
-                    int passwordIndex = passwordCursor.getColumnIndex(DB.PASS);
-                    if (passwordIndex != -1) {
-                        storedPassword = passwordCursor.getString(passwordIndex);
-                        passwordCursor.close();
+                  // Priority List
+              }else if (id== R.id.prioritylist){
+                  Intent intentLogin = new Intent(MainActivity.this, PriorityList.class);
+                  intentLogin.putExtra("usernameValue", usernameValue);
+                  intentLogin.putExtra("passwordValue", passwordValue);
+                  startActivity(intentLogin);
 
-                        if (password.equals(storedPassword)) {
-                            // if password matches, login successful
-                            return true;
-                        }
-                    }
-                    passwordCursor.close();
-                }
+                  // Calendar
+              }else if(id== R.id.calendar){
+
+                  Intent intentLogin = new Intent(MainActivity.this, CalendarActivity.class);
+                  intentLogin.putExtra("usernameValue", usernameValue);
+                  intentLogin.putExtra("passwordValue", passwordValue);
+                  startActivity(intentLogin);
+
+                  // Notifications
+              }else if (id==R.id.notification){
+                  userId = dbManager.getUserID(usernameValue);
+                  Intent intent = new Intent(MainActivity.this, ShowNotification.class);
+                  intent.putExtra("usernameValue", usernameValue);
+                  intent.putExtra("passwordValue", passwordValue);
+                  intent.putExtra("id",userId);
+                  startActivity(intent);
+
+                  // FAQ
+              }else if (id==R.id.faq){
+                  Intent intentLogin = new Intent(MainActivity.this, FaqMain.class);
+                  intentLogin.putExtra("usernameValue", usernameValue);
+                  intentLogin.putExtra("passwordValue", passwordValue);
+                  startActivity(intentLogin);
+
+                  // My Account
+              }else if(id==R.id.profile){
+                  userId = dbManager.getUserID(usernameValue);
+                  Intent iProfile = new Intent(MainActivity.this,MyAccount.class);
+                  iProfile.putExtra("usernameValue", usernameValue);
+                  iProfile.putExtra("passwordValue", passwordValue);
+                  iProfile.putExtra("id",userId);
+                  startActivity(iProfile);
+              }
+
+              // close the drawer once an item is pressed
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
             }
-            cursor.close();
-        }
+        });
 
-
-        // username doesn't exist or password doesn't match
-        return false;
-    }
-
-    // get user ID based on current logged-in username
-    public int getUserID(String username) {
-        Cursor cursor = database.rawQuery("SELECT " + DB.USER_ID + " FROM " + DB.TABLE_NAME +
-                " WHERE " + DB.USERNAME + " = ? ", new String[]{username});
-
-        int userId = 0;
-
-        if (cursor != null && cursor.moveToFirst()) {
-            int userIdIndex = cursor.getColumnIndex(DB.USER_ID);
-            if (userIdIndex != -1) {
-                userId = cursor.getInt(userIdIndex);
+        // Log Out
+        Button logout = findViewById(R.id.logOut);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
-            cursor.close();
-        } else {
-            userId = -1;
-        }
+        });
 
-        return userId;
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 
 
-    // fetch current logged-in user for display user information
-    public Cursor fetchUser(int userID) {
-        String[] columns = {DB.USERNAME, DB.DOB, DB.PASS, DB.EMAIL, DB.PHRASE};
-        String selection = DB.USER_ID + " = ?";
-        String[] selectionArgs = {String.valueOf(userID)};
-        return database.query(DB.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
-    }
 
-    // validate whether user is in the database by finding user with username and phrase
-    public boolean validateUser(String user, String phrase) {
-        String selection = DB.USERNAME + " = ? AND " + DB.PHRASE + "= ?";
-        String[] selectionArgs = {String.valueOf(user), String.valueOf(phrase)};
-        Cursor cursor = database.query(DB.TABLE_NAME, null, selection, selectionArgs, null, null, null);
-        if (cursor.getCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public void ActivityLog(String message, int userid, String date) {
-        ContentValues createNew = new ContentValues();
-        createNew.put(DB.USER_ID, userid);
-        createNew.put(DB.MESSAGE, message);
-        createNew.put(DB.MESSAGE_DATE, date);
-        database.insert(DB.TABLE_NAME5, null, createNew);
-    }
-
-    public Cursor fetchActivity(int userID) {
-        String[] columns = {DB.MESSAGE};
-        String selection = DB.USER_ID + " = ?";
-        String[] selectionArgs = {String.valueOf(userID)};
-        return database.query(DB.TABLE_NAME5, columns, selection, selectionArgs, null, null, null);
-    }
-
-    public int resetPass(long _id, String password) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DB.PASS, password);
-        int i = database.update(DB.TABLE_NAME, contentValues, DB.USER_ID + " = " + _id, null);
-        return i;
-    }
-
-
-    // update user information (Edit My Account)
-    public int update(long _id, String username, String mail, String password, String dob, String phrase) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DB.USERNAME, username);
-        contentValues.put(DB.DOB, dob);
-        contentValues.put(DB.PASS, password);
-        contentValues.put(DB.EMAIL, mail);
-        contentValues.put(DB.PHRASE, phrase);
-        int i = database.update(DB.TABLE_NAME, contentValues, DB.USER_ID + " = " + _id, null);
-        return i;
-    }
+}
