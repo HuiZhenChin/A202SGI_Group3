@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.busybuddy.R;
 
+// FAQ: Notifications
 public class item_select_notifications extends AppCompatActivity {
     ImageButton imageButton_notifications;
 
@@ -19,10 +20,16 @@ public class item_select_notifications extends AppCompatActivity {
 
         imageButton_notifications = findViewById(R.id.imageButton_notifications);
 
+        // get username
+        Intent intentLogin = getIntent();
+        String usernameValue = intentLogin.getStringExtra("usernameValue");
+
+        // return to the FAQ Main Page
         imageButton_notifications.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(item_select_notifications.this, FaqMain.class);
+                intent.putExtra("usernameValue", usernameValue);
                 startActivity(intent);
             }
         });
