@@ -1,5 +1,6 @@
-package com.example.project;
+package com.example.busybuddy;
 
+// Notifications
 public class Item {
     String notification;
 
