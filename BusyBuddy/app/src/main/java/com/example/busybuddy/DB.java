@@ -275,3 +275,82 @@ public class DB extends SQLiteOpenHelper {
     public boolean isMessageExist(String messageContent, int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
+
+        // get the list of tasks by user ID (used for display each folder's tasks function)
+    public List<TaskItem> getTasksByUserId(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<TaskItem> taskItems = new ArrayList<>();
+
+        // retrieve tasks from the database for a specific user ID
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DB.TABLE_NAME2 +
+                " WHERE " + DB.USER_ID + " = ?", new String[]{String.valueOf(userId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int taskIndex = cursor.getColumnIndex(DB.TASK);
+                int folderIndex = cursor.getColumnIndex(DB.FOLDER);
+
+                if (taskIndex != -1 && folderIndex != -1) {
+                    String task = cursor.getString(taskIndex);
+                    String folder = cursor.getString(folderIndex);
+
+                    // set null for those unwanted information (main info is task and folder)
+                    TaskItem taskItem = new TaskItem(task,null, null, null, 0, folder, null, null );
+                    taskItems.add(taskItem);
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return taskItems;
+    }
+
+// get the list of folder from different user based on their user ID (every user has different task folders)
+    public List<String> getFolderNames(int userId) {
+        List<String> folderNames = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection = null;
+        String[] selectionArgs = null;
+
+        if (userId != 0) {
+            selection = DB.USER_ID + " = ?";
+            selectionArgs = new String[]{String.valueOf(userId)};
+        }
+
+        Cursor cursor = db.query(TABLE_NAME4, new String[]{FOLDER_NAME}, selection, selectionArgs, null, null, null);
+
+        if (cursor != null) {
+            try {
+                if (cursor.moveToFirst()) {
+                    do {
+                        int columnIndex = cursor.getColumnIndex(FOLDER_NAME);
+                        if (columnIndex >= 0) {
+                            String folderName = cursor.getString(columnIndex);
+                            folderNames.add(folderName);
+                        }
+                    } while (cursor.moveToNext());
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+
+
+        return folderNames;
+    }
+
+    // insert new task folder created by the user (user can create a new task folder based on their preferences)
+    public long insertNewFolder(String folderName, int userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DB.FOLDER_NAME, folderName);
+        values.put(DB.USER_ID, userId);  // insert user ID to differentiate the ownership of the folder
+
+        long insertedRowId = db.insert(DB.TABLE_NAME4, null, values);
+
+        db.close();
+
+        return insertedRowId; // Return the row ID as a long
+    }
+}
+        
