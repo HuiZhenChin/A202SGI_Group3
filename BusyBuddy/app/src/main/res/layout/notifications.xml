@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background2">
 
-
+    <!-- Used for FAQ -->
+    <!-- Page Title -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -21,6 +22,7 @@
         tools:layout_editor_absoluteX="3dp"
         tools:layout_editor_absoluteY="3dp" />
 
+    <!-- message -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="331dp"
@@ -38,6 +40,7 @@
         android:layout_gravity="center_vertical|end"
         android:lineSpacingExtra="20sp"/>
 
+    <!-- exit button -->
     <ImageButton
         android:id="@+id/imageButton_notifications"
         android:layout_width="wrap_content"
@@ -51,20 +54,21 @@
         android:background="@drawable/menu_background"/>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="220dp"
-        android:layout_height="200dp"
+        android:layout_width="226dp"
+        android:layout_height="355dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="10dp">
 
+        <!-- notification sample view -->
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="220dp"
-            android:layout_height="200dp"
+            android:layout_width="231dp"
+            android:layout_height="355dp"
             android:scaleType="fitXY"
             android:src="@drawable/notifications"
-            tools:ignore="ContentDescription"/>
+            tools:ignore="ContentDescription" />
 
     </androidx.cardview.widget.CardView>
 
