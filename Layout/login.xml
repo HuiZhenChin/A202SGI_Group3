@@ -9,6 +9,7 @@
     android:paddingTop="50dp"
     tools:context=".MainActivity">
 
+    <!-- Used for Login Page -->
     <LinearLayout
 
         android:id="@+id/linearLayout2"
@@ -19,6 +20,7 @@
         android:layout_marginTop="122dp"
         android:orientation="vertical" />
 
+    <!-- app logo -->
     <ImageView
         android:id="@+id/appLogo"
         android:layout_width="201dp"
@@ -28,6 +30,7 @@
         android:baselineAlignBottom="false"
         app:srcCompat="@drawable/logo" />
 
+    <!-- app name -->
     <TextView
         android:id="@+id/appName"
         android:layout_width="wrap_content"
@@ -40,6 +43,7 @@
         android:textSize="36sp"
         android:textStyle="bold" />
 
+    <!-- Page Title -->
     <TextView
         android:id="@+id/loginTitle"
         android:layout_width="wrap_content"
@@ -52,6 +56,7 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <!-- username input -->
     <EditText
         android:id="@+id/usernameInput"
         android:layout_width="315dp"
@@ -68,6 +73,7 @@
         android:textColorHint="#000000"
         android:textSize="14sp" />
 
+    <!-- password input -->
     <EditText
         android:id="@+id/passwordInput"
         android:layout_width="315dp"
@@ -77,68 +83,72 @@
         android:ems="10"
         android:fontFamily="@font/average"
         android:hint="Password"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:paddingLeft="10dp"
         android:textColorHighlight="#0FFFFFFF"
         android:textColorHint="#000000"
         android:textSize="14sp" />
 
+    <!-- show or hide password icon -->
+    <ImageView
+        android:id="@+id/show_hide_password"
+        android:layout_width="32dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="475dp"
+        android:src="@drawable/hide_icon" />
+
+    <!-- login button -->
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="104sp"
         android:layout_height="48sp"
         android:layout_marginLeft="210dp"
-        android:layout_marginTop="610dp"
+        android:layout_marginTop="640dp"
         android:background="@drawable/loginbtn_border"
         android:text="LOGIN"
         android:textColor="@drawable/loginbtn_text_color"
         android:textSize="16sp" />
 
+    <!-- text -->
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="580dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="590dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Doesn't have an account?"
         android:textColor="#FFFFFF"
-        android:textSize="14sp" />
+        android:textSize="16dp" />
 
+    <!-- sign up  -->
     <TextView
         android:id="@+id/signUpText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="210dp"
-        android:layout_marginTop="580dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="590dp"
+        android:clickable="true"
         android:fontFamily="@font/roboto_bold"
+        android:onClick="openSignUp"
         android:text="@string/signUp"
         android:textColor="#FFFFFF"
-        android:textSize="14sp" />
+        android:textSize="16dp" />
 
-    <CheckBox
-        android:id="@+id/checkboxSignIn"
-        android:layout_width="184dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="-5dp"
-        android:layout_marginTop="530dp"
-        android:checked="true"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Stay Signed In"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:theme="@style/CheckBoxStyle" />
-
+    <!-- forgot password -->
     <TextView
         android:id="@+id/fgtPassword"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="210dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="180dp"
         android:layout_marginTop="545dp"
         android:fontFamily="@font/roboto_bold"
+        android:onClick="reset"
         android:text="@string/password"
         android:textColor="#FFFFFF"
-        android:textSize="12sp" />
+        android:textSize="15sp" />
+
+
 
 </RelativeLayout>
-
