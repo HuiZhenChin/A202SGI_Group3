@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
-
+    <!-- Navigation Drawer-->
+    <!-- Display Folder -->
     <item
         android:id="@+id/folder"
         android:title="Folder"
@@ -12,6 +13,7 @@
 
     </item>
 
+    <!-- Priority List -->
     <item
         android:id="@+id/prioritylist"
         android:title="Priority List"
@@ -19,6 +21,7 @@
 
     </item>
 
+    <!-- Calendar -->
     <item
         android:id="@+id/calendar"
         android:title="Calendar"
@@ -26,6 +29,7 @@
 
     </item>
 
+    <!-- Notifications -->
     <item
         android:id="@+id/notification"
         android:title="Notifications"
@@ -33,6 +37,7 @@
 
     </item>
 
+    <!-- FAQ -->
     <item
         android:id="@+id/faq"
         android:title="FAQ"
@@ -40,13 +45,13 @@
 
     </item>
 
+    <!-- My Account -->
     <item
         android:id="@+id/profile"
         android:title="My Account"
         android:icon="@drawable/baseline_person_24">
 
     </item>
-
 
 
 </menu>
