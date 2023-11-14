@@ -27,7 +27,6 @@
         <activity android:name=".CalendarActivity"></activity>
         <activity android:name=".EventEditActivity"></activity>
         <activity android:name=".WeekViewActivity"></activity>
-        <activity android:name=".MenuActivity"></activity>
         <activity android:name=".DisplayFolder"></activity>
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".MyAccount"></activity>
@@ -39,8 +38,8 @@
         <activity android:name=".item_select_notifications"></activity>
         <activity android:name=".item_select_task_create"></activity>
         <activity android:name=".item_select_task_delete"></activity>
-        <activity android:name=".item_select_task_description"></activity>
         <activity android:name=".ShowNotification"></activity>
+        <activity android:name=".ForgetPass"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
