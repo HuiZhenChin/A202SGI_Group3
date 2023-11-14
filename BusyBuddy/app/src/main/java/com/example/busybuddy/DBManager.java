@@ -137,6 +137,7 @@ public class DBManager {
         }
     }
 
+    // insert notification message
     public void ActivityLog(String message, int userid, String date) {
         ContentValues createNew = new ContentValues();
         createNew.put(DB.USER_ID, userid);
@@ -145,6 +146,23 @@ public class DBManager {
         database.insert(DB.TABLE_NAME5, null, createNew);
     }
 
+    // fetch all the unread notification message
+    public Cursor fetchUnreadActivity(int userID) {
+        String selection = DB.USER_ID + " = ? AND " + DB.READ + "= 'NO'";
+        String[] selectionArgs = {String.valueOf(userID)};
+        return database.query(DB.TABLE_NAME5, null, selection, selectionArgs, null, null, null);
+    }
+
+    // update the read notification message
+    public void updateRead(int messageID) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DB.READ, "YES");
+        String whereClause = DB.MESSAGE_ID + " = ?";
+        String[] whereArgs = {String.valueOf(messageID)};
+        database.update(DB.TABLE_NAME5, contentValues, whereClause, whereArgs);
+    }
+
+    // fetch the notification message
     public Cursor fetchActivity(int userID) {
         String[] columns = {DB.MESSAGE};
         String selection = DB.USER_ID + " = ?";
@@ -152,6 +170,7 @@ public class DBManager {
         return database.query(DB.TABLE_NAME5, columns, selection, selectionArgs, null, null, null);
     }
 
+    // reset password function
     public int resetPass(long _id, String password) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DB.PASS, password);
@@ -172,7 +191,7 @@ public class DBManager {
         return i;
     }
 
-
+    
     // task
 
     // update task priority while dragging
