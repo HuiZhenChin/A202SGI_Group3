@@ -11,6 +11,7 @@ import com.example.busybuddy.R;
 
 import java.util.List;
 
+// Notifications Recycler View Adapter
 public class AdapterView extends RecyclerView.Adapter<Notification> {
 
     Context context;
@@ -21,6 +22,7 @@ public class AdapterView extends RecyclerView.Adapter<Notification> {
         this.items = items;
     }
 
+    // customized row design for recycler view
     @NonNull
     @Override
     public Notification onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

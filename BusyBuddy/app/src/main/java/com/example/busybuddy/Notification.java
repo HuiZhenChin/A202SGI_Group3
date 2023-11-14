@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.busybuddy.R;
 
+// Notifications Page
 public class Notification extends RecyclerView.ViewHolder{
     TextView notif_msg;
 
