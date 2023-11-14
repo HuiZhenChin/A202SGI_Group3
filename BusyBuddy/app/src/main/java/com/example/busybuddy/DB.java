@@ -266,4 +266,12 @@ public class DB extends SQLiteOpenHelper {
         return false; // if something went wrong, assume the folder does not exist
     }
 
-    
+    // get list of tasks (title and due date) 
+    public List<TaskItem> getTasksByUser(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<TaskItem> taskItems = new ArrayList<>();
+
+    // check if notifications message already exist
+    public boolean isMessageExist(String messageContent, int userID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
