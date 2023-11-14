@@ -7,7 +7,8 @@ android:layout_height="match_parent"
 android:background="@drawable/background2"
 tools:context=".MainActivity">
 
-
+    <!-- Used for Priority List (Display Task) -->
+    <!-- exit button -->
     <ImageButton
         android:id="@+id/menuBtn"
         android:layout_width="wrap_content"
@@ -18,7 +19,7 @@ tools:context=".MainActivity">
         android:contentDescription="back"
         android:src="@drawable/baseline_format_list_bulleted_24" />
 
-
+    <!-- search  bar -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="230dp"
@@ -33,7 +34,7 @@ tools:context=".MainActivity">
         app:queryBackground="@android:color/transparent"
         app:queryHint="Search your tasks..." />
 
-
+    <!-- create new task button -->
     <ImageButton
         android:id="@+id/addBtn"
         android:layout_width="wrap_content"
@@ -44,6 +45,7 @@ tools:context=".MainActivity">
         android:contentDescription="add"
         android:src="@drawable/baseline_add_circle_24" />
 
+    <!-- Page Title -->
     <TextView
         android:id="@+id/titleMyTask"
         android:layout_width="99dp"
@@ -58,22 +60,36 @@ tools:context=".MainActivity">
         tools:layout_editor_absoluteX="160dp"
         tools:layout_editor_absoluteY="79dp" />
 
+    <!-- page guidelines icon -->
+    <ImageButton
+        android:id="@+id/questionMarkButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/menu_background"
+        android:contentDescription="Show Guidelines"
+        android:src="@drawable/baseline_help_outline_24" />
 
+
+    <!-- display task recycler view -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="130dp" />
+        android:layout_marginTop="130dp" >
 
+    </androidx.recyclerview.widget.RecyclerView>
 
-
+    <!-- search results list view -->
     <ListView
         android:id="@+id/searchList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="354dp"
+        android:layout_height="606dp"
         android:layout_below="@id/searchView"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="57dp"
         android:layout_marginRight="20dp"
         android:background="#FFFFFF"
         android:visibility="invisible"
@@ -86,6 +102,7 @@ tools:context=".MainActivity">
 
     </ListView>
 
+    <!-- bee image (when there is no task created by user) -->
     <ImageView
         android:id="@+id/imageBee"
         android:layout_width="245dp"
@@ -95,6 +112,7 @@ tools:context=".MainActivity">
         android:src="@drawable/bee3"
         android:visibility="invisible" />
 
+    <!-- no task message -->
     <TextView
         android:id="@+id/noTaskMessage"
         android:layout_width="wrap_content"
