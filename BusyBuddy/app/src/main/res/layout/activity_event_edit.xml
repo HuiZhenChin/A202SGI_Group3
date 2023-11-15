@@ -8,3 +8,96 @@
     android:paddingLeft="40dp"
     android:paddingTop="50dp"
     tools:context=".MainActivity">
+
+    <!-- Used for Calendar -->
+    <LinearLayout
+
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="122dp"
+        android:orientation="vertical" />
+
+    <!-- Page Title -->
+    <TextView
+        android:id="@+id/titleCreateTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/varela"
+        android:text="New Task"
+        android:textColor="#000000"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <!-- Event Input Title -->
+    <TextView
+        android:id="@+id/taskTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Notes"
+        android:textAppearance="@font/roboto_bold"
+        android:textSize="20sp"
+        android:textAlignment="center" />
+
+    <!-- Event Input Field -->
+    <EditText
+        android:id="@+id/eventNameET"
+        android:layout_width="319dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="200dp"
+        android:ems="10"
+        android:fontFamily="@font/average"
+        android:hint="Enter Notes"
+        android:inputType="text"
+        android:textColorHint="@color/btn_color"
+        android:textSize="16sp" />
+
+    <!-- Selected Date -->
+    <TextView
+        android:id="@+id/eventDateTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Date"
+        android:textAlignment="center"
+        android:textAppearance="@font/roboto_bold"
+        android:textSize="20sp" />
+
+    <!-- Current Time -->
+    <TextView
+        android:id="@+id/eventTimeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="110dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Time"
+        android:textAppearance="@font/roboto_bold"
+        android:textSize="20sp"
+        android:textAlignment="center"/>
+
+    <!-- Create New Task Button -->
+    <Button
+        android:layout_width="255dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="540dp"
+        android:background="@drawable/loginbtn_border"
+        android:fontFamily="@font/varela"
+        android:text="Create New Task"
+        android:textColor="@drawable/loginbtn_text_color"
+        android:textSize="18sp"
+        android:onClick="saveEventAction" />
+
+</RelativeLayout>
