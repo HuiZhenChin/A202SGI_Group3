@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background2">
+
+    <!-- Used for FAQ Main Page -->
+    <ImageButton
+        android:id="@+id/menuBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/menu_background"
+        android:contentDescription="back"
+        android:src="@drawable/baseline_format_list_bulleted_24" />
+
+    <!-- Page Title -->
+    <TextView
+        android:id="@+id/page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/average"
+        android:text="Frequently Asked Questions"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="3dp" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="180dp"
+        android:layout_height="132dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/container_border">
+
+        <!-- About the App -->
+        <TextView
+            android:id="@+id/appTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/average"
+            android:text="About the App"
+            android:textColor="#333333"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/menu_background"
+            android:contentDescription="app"
+            app:srcCompat="@drawable/baseline_phone_android_24" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/container2"
+        android:layout_width="180dp"
+        android:layout_height="132dp"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/container_border_2">
+
+        <!-- List of Features -->
+        <TextView
+            android:id="@+id/featuresTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/average"
+            android:text="List of Features"
+            android:textColor="#333333"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/features"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/menu_background"
+            android:contentDescription="features"
+            app:srcCompat="@drawable/baseline_list" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/container3"
+        android:layout_width="180dp"
+        android:layout_height="132dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="230dp"
+        android:background="@drawable/container_border_2">
+
+        <!-- Notifications -->
+        <TextView
+            android:id="@+id/notificationTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/average"
+            android:text="Notifications"
+            android:textColor="#333333"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/notifications"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/menu_background"
+            android:contentDescription="notifications"
+            app:srcCompat="@drawable/baseline_notifications" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/container4"
+        android:layout_width="180dp"
+        android:layout_height="132dp"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="230dp"
+        android:background="@drawable/container_border">
+
+        <!-- Create New Task -->
+        <TextView
+            android:id="@+id/taskTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/average"
+            android:text="Create Task"
+            android:textColor="#333333"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/task"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/menu_background"
+            android:contentDescription="task"
+            app:srcCompat="@drawable/baseline_add_task_24" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/container5"
+        android:layout_width="180dp"
+        android:layout_height="132dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="380dp"
+        android:background="@drawable/container_border">
+
+        <!-- Delete Task -->
+        <TextView
+            android:id="@+id/deleteTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/average"
+            android:text="Delete Task"
+            android:textColor="#333333"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/menu_background"
+            android:contentDescription="delete"
+            app:srcCompat="@drawable/baseline_delete" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/container6"
+        android:layout_width="180dp"
+        android:layout_height="132dp"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="380dp"
+        android:background="@drawable/container_border_2">
+
+        <!-- Contact Us -->
+        <TextView
+            android:id="@+id/contactUsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/average"
+            android:text="Contact Us"
+            android:textColor="#333333"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/contactUs"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/menu_background"
+            android:contentDescription="contact us"
+            app:srcCompat="@drawable/baseline_contact_mail_24" />
+
+    </FrameLayout>
+
+</RelativeLayout>
