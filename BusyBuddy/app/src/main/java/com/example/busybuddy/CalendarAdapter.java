@@ -7,18 +7,14 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.security.AccessController;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
+// adapter for calendar
 class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {
     private final ArrayList<LocalDate> days;
@@ -39,10 +35,11 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
 
-        if(days.size() > 15) //month view
+        if(days.size() > 15) // month view
             layoutParams.height = (int) (parent.getHeight() * 0.1);
         else // week view
             layoutParams.height = (int) (parent.getHeight() * 0.6);
+
 
         return new CalendarViewHolder(view, onItemListener, days);
     }
@@ -51,7 +48,7 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
     {
         LocalDate dates = days.get(position);
-
+        // if the date has event, set colour to the date box
         if (Event.hasEventsForDate(dates)) {
             holder.itemView.setBackgroundColor(Color.parseColor("#E4CC86"));
         }
@@ -61,6 +58,7 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
             holder.dayOfMonth.setText("");
         else
         {
+            // when the date is selected, set colour to the date box
             holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
             if(date.equals(CalendarUtils.selectedDate))
                 holder.parentView.setBackgroundColor(Color.LTGRAY);
