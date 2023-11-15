@@ -125,6 +125,19 @@
             android:spinnerMode="dropdown" />
     </FrameLayout>
 
+    <!-- guidelines icon -->
+    <ImageButton
+        android:id="@+id/questionMarkButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="460dp"
+        android:background="@drawable/menu_background"
+        android:contentDescription="Show Guidelines"
+        android:src="@drawable/baseline_help_outline_24" />
+
+
     <!-- title input -->
     <EditText
         android:id="@+id/titleInput"
