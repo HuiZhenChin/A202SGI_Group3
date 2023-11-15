@@ -257,3 +257,34 @@ public class DBManager {
 
         return taskId;
     }
+
+    // calendar
+    // insert new calendar event
+    public void calendarEvent(String eventTitle, String eventDate, String time, int userID) {
+        ContentValues createNew = new ContentValues();
+        createNew.put(DB.EVENT, eventTitle);
+        createNew.put(DB.DATE, eventDate);
+        createNew.put(DB.TIME, time);
+        createNew.put(DB.USER_ID, userID);
+        database.insert(DB.TABLE_NAME3, null, createNew);
+    }
+
+    // display calendar event based on user ID
+    public Cursor displayCalendarEvent(int userID) {
+        String[] columns = {DB.EVENT, DB.DATE, DB.TIME};
+        String selection = DB.USER_ID + " = ?";
+        String[] selectionArgs = {String.valueOf(userID)};
+        return database.query(DB.TABLE_NAME3, columns, selection, selectionArgs, null, null, null);
+    }
+
+    // drop any unwanted table (not using)
+    public void dropTable(SQLiteDatabase db) {
+
+        String dropTableSQL = "DROP TABLE IF EXISTS " + DB.TABLE_NAME2;
+
+        db.execSQL(dropTableSQL);
+    }
+
+
+
+}
