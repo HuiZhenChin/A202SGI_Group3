@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background2"
+    tools:context=".item_select_task_delete">
+
+    <!-- Used for FAQ -->
+    <!-- exit button -->
+    <ImageButton
+        android:id="@+id/imageButton_task_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="340dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="back"
+        android:outlineSpotShadowColor="@color/black"
+        app:srcCompat="@drawable/baseline_cancel_24"
+        tools:layout_edindroid_absoluteX="3dp"
+        tools:layout_editor_absoluteY="144dp"
+        android:background="@drawable/menu_background"/>
+
+    <!-- Page Title -->
+    <TextView
+        android:id="@+id/page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="3dp"
+        android:fontFamily="@font/average"
+        android:textColor="#000000"
+        android:text="How to Delete List?" />
+
+    <!-- message -->
+    <TextView
+        android:id="@+id/task_subtitle"
+        android:layout_width="309dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/tinos"
+        android:gravity="left"
+        android:lineSpacingExtra="20sp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:text="You may hold the list that you wish to delete and slide left or right to remove the task from the list."
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="189dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="243dp"
+        android:layout_height="349dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="10dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="243dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/taskdelete"
+            tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
