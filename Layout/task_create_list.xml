@@ -7,6 +7,8 @@
     android:background="@drawable/background2"
     tools:context=".item_select_task_create">
 
+    <!-- Used for FAQ -->
+    <!-- exit button -->
     <ImageButton
         android:id="@+id/imageButton_task_create"
         android:layout_width="wrap_content"
@@ -18,8 +20,9 @@
         app:srcCompat="@drawable/baseline_cancel_24"
         tools:layout_edindroid_absoluteX="3dp"
         tools:layout_editor_absoluteY="144dp"
-        android:background="@drawable/backbtn_background"/>
+        android:background="@drawable/menu_background"/>
 
+    <!-- Page Title -->
     <TextView
         android:id="@+id/page_title"
         android:layout_width="wrap_content"
@@ -34,6 +37,7 @@
         android:textColor="#000000"
         android:text="How to Create List?" />
 
+    <!-- message -->
     <TextView
         android:id="@+id/task_subtitle"
         android:layout_width="309dp"
@@ -50,28 +54,30 @@
         tools:layout_editor_absoluteY="189dp"
         android:text="You may need to choose the folder at the side menu where you wish to create a sub-task and press the           button." />
 
+    <!-- create new task icon -->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/createbutton"
+        android:layout_width="39dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="110dp"
-        android:layout_marginTop="215dp"/>
+        android:layout_marginTop="215dp"
+        app:srcCompat="@drawable/baseline_add_circle_24" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="280dp"
-        android:layout_height="300dp"
+        android:layout_width="219dp"
+        android:layout_height="350dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="280dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="10dp">
 
+        <!-- supporting image -->
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="280dp"
-            android:layout_height="300dp"
+            android:layout_width="match_parent"
+            android:layout_height="354dp"
             android:scaleType="fitXY"
             android:src="@drawable/createtask"
-            tools:ignore="ContentDescription"/>
+            tools:ignore="ContentDescription" />
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
