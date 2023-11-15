@@ -7,6 +7,8 @@
     android:background="@drawable/background2"
     tools:context=".item_select_list_of_features">
 
+    <!-- Used for FAQ -->
+    <!-- List of Features Title -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -21,6 +23,7 @@
         tools:layout_editor_absoluteX="3dp"
         tools:layout_editor_absoluteY="3dp" />
 
+    <!-- message -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="309dp"
@@ -29,18 +32,19 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="150dp"
         android:fontFamily="@font/tinos"
-        android:text="- Create and delete tasks\n- Calendar-based design (list the tasks due on each date)
-        \n- List-based design (create folders or sub-lists to store the task in different categories)
-        \n- Search tasks based on keywords
-        \n- Notification to store the history of the user's activity and remind the user when a due is coming soon
-        \n- Drag and drop a task to another folder if it is wrongly created previously"
         android:gravity="left"
         android:lineSpacingExtra="20sp"
+        android:text="- Create and delete tasks\n- Calendar-based design (list the tasks due on each date)
+        \n- List-based design (create folders to store the task in different categories)
+        \n- Search tasks based on keywords
+        \n- Notification to store the history of the user's activity and remind the user when a due is coming soon
+        \n- Drag and drop a task to change the priority"
         android:textColor="#000000"
         android:textSize="16sp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="189dp" />
 
+    <!-- exit button -->
     <ImageButton
         android:id="@+id/imageButton_list_of_features"
         android:layout_width="wrap_content"
@@ -52,7 +56,7 @@
         app:srcCompat="@drawable/baseline_cancel_24"
         tools:layout_edindroid_absoluteX="3dp"
         tools:layout_editor_absoluteY="144dp"
-        android:background="@drawable/backbtn_background"/>
+        android:background="@drawable/menu_background"/>
 
 
 </RelativeLayout>
