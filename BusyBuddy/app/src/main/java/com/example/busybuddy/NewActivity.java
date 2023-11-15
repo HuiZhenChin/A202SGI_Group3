@@ -3,6 +3,7 @@ package com.example.busybuddy;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class NewActivity extends AppCompatActivity {
     TextView selectedDateView;
     private EditText taskTitleEditText, noteEditText;
     private TextView dateInputTextView;
+    String usernameValue = "";
 
 
     @Override
@@ -379,12 +381,22 @@ public class NewActivity extends AppCompatActivity {
             }
         });
 
+        // information icon (guidelines)
+        ImageButton questionMarkButton = findViewById(R.id.questionMarkButton);
+        questionMarkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showGuidelinesDialog();
+            }
+        });
+
 
     }
 
     // direct to Priority List
     public void goPrevious(){
         Intent intent = new Intent(this, PriorityList.class);
+        intent.putExtra("usernameValue", usernameValue);
         startActivity(intent);
     }
 
@@ -393,9 +405,34 @@ public class NewActivity extends AppCompatActivity {
         return db.isFolderExist(folderName, userID);
     }
 
+    // show folder guidelines
+    private void showGuidelinesDialog() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+        builder.setTitle("Saved Folder Guidelines");
+        builder.setMessage("Hi buddies, you may start creating a new folder by pressing the Create New Folder option.\n\n" +
+                "But once the new folder is created, it CANNOT be deleted.\n" +
+                "Or you can choose the option of Not required folder if you do not want to save your task is any folders. \n" +
+                "Later, you may review the list of task stored in each folder through the Folder Page.\n" +
+                " \n" +
+                " Enjoy your day! \n"
+        );
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
 
 }
+
+
+
 
 
 
