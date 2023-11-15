@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
+// Event Adapter for Calendar Event
 public class EventAdapter extends ArrayAdapter<Event>
 {
     public EventAdapter(@NonNull Context context, List<Event> events)
@@ -30,6 +31,7 @@ public class EventAdapter extends ArrayAdapter<Event>
 
         TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
 
+        // get the event title and show at the selected date list view
         String eventTitle = event.getName() +" "+ CalendarUtils.formattedTime(event.getTime());
         eventCellTV.setText(eventTitle);
         return convertView;
