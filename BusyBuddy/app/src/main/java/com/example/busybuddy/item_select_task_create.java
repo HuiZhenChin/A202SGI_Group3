@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.busybuddy.R;
 
+// FAQ: Create New Task
 public class item_select_task_create extends AppCompatActivity {
     ImageButton imageButton_task_create;
 
@@ -19,10 +20,16 @@ public class item_select_task_create extends AppCompatActivity {
 
         imageButton_task_create = findViewById(R.id.imageButton_task_create);
 
+        // get username
+        Intent intentLogin = getIntent();
+        String usernameValue = intentLogin.getStringExtra("usernameValue");
+
+        // return to the FAQ Main Page
         imageButton_task_create.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(item_select_task_create.this, FaqMain.class);
+                intent.putExtra("usernameValue", usernameValue);
                 startActivity(intent);
             }
         });
