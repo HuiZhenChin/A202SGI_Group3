@@ -75,10 +75,6 @@ public class NewActivity extends AppCompatActivity {
         folderNames.add("Not required folder");
         if (isFolderAlreadyExist("Not required folder", userID)){
             folderNames.remove("Not required folder");  // remove from the list if already exists to prevent duplication
-        }else{
-            // default folder for all users
-            folderNames.add("Not required folder");   // if this task is not required to save in any folder
-
         }
         // if user wants to create a new folder
         folderNames.add("Create New Folder");
@@ -328,16 +324,13 @@ public class NewActivity extends AppCompatActivity {
         // date picker function (choose date)
         dateBtn = findViewById(R.id.dateInput);
         selectedDateView = findViewById(R.id.selectedDate);
-
         dateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
-
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
-
                 // pop up date picker dialog to select the date, month and year
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         NewActivity.this,
@@ -348,7 +341,6 @@ public class NewActivity extends AppCompatActivity {
                                                   int monthOfYear, int dayOfMonth) {
                                 // date chosen by the user
                                 String selectedDate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-
                                 // check if the selected date is not earlier than the current date
                                 Calendar selectedCalendar = Calendar.getInstance();
                                 selectedCalendar.set(year, monthOfYear, dayOfMonth);
@@ -362,10 +354,8 @@ public class NewActivity extends AppCompatActivity {
                             }
                         },
                         year, month, day);
-
                 // set the minimum date to the current date, block the earlier date
                 datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
-
                 // display date picker dialog
                 datePickerDialog.show();
             }
@@ -430,7 +420,6 @@ public class NewActivity extends AppCompatActivity {
 
 
 }
-
 
 
 
