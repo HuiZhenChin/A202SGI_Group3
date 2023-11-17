@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.test5"
+    namespace = "com.example.busybuddy"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.test5"
+        applicationId = "com.example.busybuddy"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
