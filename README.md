@@ -8,3 +8,23 @@ Group Members:
 4. uns3ri0us - Ng Sheng Song
 
 
+Chin Hui Zhen
+-Login (UI)
+-Create New Task
+-Priority List
+
+Peh Jia Xuan
+-FAQ
+-Calendar
+
+Ng Sheng Song
+-Login (Database)
+-Sign Up
+-Notifications
+-My Account
+-Reset Password
+
+Lian Yu Jia
+-FAQ
+-Navigation Drawer
+-Folder
