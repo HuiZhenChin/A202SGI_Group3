@@ -271,12 +271,60 @@ public class DB extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         List<TaskItem> taskItems = new ArrayList<>();
 
+        // retrieve tasks from the database for a specific user ID
+        Cursor cursor = db.rawQuery("SELECT " + DB.TASK + ", " + DB.DUE_DATE + " FROM " + DB.TABLE_NAME2 +
+                " WHERE " + DB.USER_ID + " = ?", new String[]{String.valueOf(userId)});
+
+        if (cursor.moveToFirst()) {
+            int taskIndex = cursor.getColumnIndex(DB.TASK);
+            int dateIndex = cursor.getColumnIndex(DB.DUE_DATE);
+
+            do {
+                if (taskIndex != -1 && dateIndex != -1) {
+                    String task = cursor.getString(taskIndex);
+                    String date = cursor.getString(dateIndex);
+
+                    // set null for unwanted information (main info is task and date)
+                    TaskItem taskItem = new TaskItem(task, null, date, null, 0, null, null, null);
+                    taskItems.add(taskItem);
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return taskItems;
+    }
+
     // check if notifications message already exist
     public boolean isMessageExist(String messageContent, int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
 
-        // get the list of tasks by user ID (used for display each folder's tasks function)
+        try {
+            String query = "SELECT COUNT(*) FROM " + DB.TABLE_NAME5 +
+                    " WHERE " + DB.MESSAGE + " = ? AND " +
+                    DB.USER_ID + " = ?";
+            cursor = db.rawQuery(query, new String[]{messageContent, String.valueOf(userID)});
+
+            // move the cursor to the first row
+            if (cursor.moveToFirst()) {
+                // get the count from the query result
+                int count = cursor.getInt(0);
+                return count > 0; // if count > 0, the message exists; otherwise, it does not exist
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            // close the database connection
+            db.close();
+        }
+
+        return false;
+    }
+
+
+// get the list of tasks by user ID (used for display each folder's tasks function)
     public List<TaskItem> getTasksByUserId(int userId) {
         SQLiteDatabase db = this.getReadableDatabase();
         List<TaskItem> taskItems = new ArrayList<>();
