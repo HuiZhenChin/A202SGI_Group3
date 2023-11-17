@@ -53,6 +53,7 @@ public class DB extends SQLiteOpenHelper {
     public static final String MESSAGE_ID = "messageID"; // message ID
     public static final String MESSAGE = "message"; // message content
     public static final String MESSAGE_DATE = "message_date"; // message created date
+    public static final String READ = "read"; // read
 
     // database name
     static final String DB_NAME = "BUSY-BUDDY.DB";
